@@ -6,6 +6,7 @@
     <meta content="text/html; charset=ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/icono.ico">
     <title>WALLAPOP</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,9 +40,9 @@
 		</form>
 		</div>
 
-      <footer class="footer">
+      <div class="footer">
         <p>&copy; 2016 Wallapop, Inc.</p>
-      </footer>
+      </div>
 
     </div> 
   </body>

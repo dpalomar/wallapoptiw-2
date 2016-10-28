@@ -6,6 +6,7 @@
     <meta content="text/html; charset=ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/icono.ico">
     <title>WALLAPOP: Registro</title>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -154,7 +155,7 @@
 					<option value="51">Ceuta</option>
 					<option value="52">Melilla</option>
 		</select>
-		</span></p><br><br>
+		</p><br><br>
 					
 				</fieldset><br><br>
 				<input type="button" value="Enviar" onclick="return validacion();" class="btn btn-info">
@@ -166,9 +167,9 @@
 
 		</div>
 
-      <footer class="footer">
+      <div class="footer">
         <p>&copy; 2016 Wallapop, Inc.</p>
-      </footer>
+      </div>
 
     </div> 
   </body>
