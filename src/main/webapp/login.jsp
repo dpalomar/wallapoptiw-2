@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+boolean errorInicio = false;
+if(request.getAttribute("loginCorrecto") != null &&
+   ((String) request.getAttribute("loginCorrecto")) == "false")
+{
+	errorInicio = true;
+}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -25,7 +33,7 @@
       </div>
 
 		<div class="jumbotron">
-		<form>
+		<form action ="loginServlet" method ="post">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Nombre de usuario</label>
 			<input type="text" class="form-control" id="exampleInputEmail1">
@@ -34,7 +42,11 @@
 			<label for="exampleInputPassword1">Contraseña</label>
 			<input type="password" class="form-control" id="exampleInputPassword1">
 		</div>
-		
+		<% if(errorInicio) { %>
+		<div>
+			<p style="color:red;">El nombre de usuario o la contraseña no es correcta.</p>
+		</div>
+		<% } %>
 		<button type="submit" class="btn btn-info">Enviar</button>
 		<button type="button" class="btn btn-success">Regístrate</button>
 		</form>
