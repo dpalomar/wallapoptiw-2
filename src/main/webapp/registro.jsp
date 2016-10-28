@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%boolean registroCorrecto = false;
+    if(request.getAttribute("registroCorrecto") != null &&
+    		   ((String) request.getAttribute("registroCorrecto")) == "true")
+    		{
+    			registroCorrecto = true;
+    		}
+    
+    %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -78,8 +86,11 @@
 
 		<div class="jumbotron">		
 		
+		<% if(!registroCorrecto) { %>
+		
 		<h2>Crea tu cuenta en "WALLAPOP"</h2>
-		<form id="formulario">
+		
+		<form id="formulario" action="registroServlet" method="post">
 		
 
 				<div id="info">
@@ -158,13 +169,17 @@
 		</p><br><br>
 					
 				</fieldset><br><br>
-				<input type="button" value="Enviar" onclick="return validacion();" class="btn btn-info">
+				<input type="submit" value="Enviar" onclick="return validacion();" class="btn btn-info">
 		</form>
+	
+		<% } else  { %>
 		
-		<div id="existe" title="Bienvenido" style="display:none;">
+		<h2>Ya estas en "WALLAPOP"</h2>
+		
+		<div id="existe" title="Bienvenido">
 		<p>Gracias por registrarse en nuestra página. Cuando sus datos hayan sido verificados se le activará la cuenta y podrá empezar a usar nuestros servicios. </p>
 		</div>
-
+<% } %>
 		</div>
 
       <div class="footer">

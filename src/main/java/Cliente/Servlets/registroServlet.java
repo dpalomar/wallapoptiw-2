@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class registroServlet
  */
-@WebServlet("/loginServlet")
-public class loginServlet extends HttpServlet {
+@WebServlet("/registroServlet")
+public class registroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public registroServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +29,7 @@ public class loginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("registro.jsp");
 	}
 
 	/**
@@ -37,28 +37,31 @@ public class loginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String correo = request.getParameter("exampleInputEmail1");
-		String contrasena = request.getParameter("exampleInputPassword1");
-		
+		String email = request.getParameter("email");
+		String contras = request.getParameter("contra1");
+		String nombre = request.getParameter("nomusu");
+		String apellido = request.getParameter("apellidos");
+		String ciudad = request.getParameter("prov");
 	
-		if(validarLogin(correo, contrasena) == true)
-		{			
-			RequestDispatcher rd = request.getRequestDispatcher("inicioCliente.jsp");
+		if(validarRegistro(email, contras, nombre, apellido, ciudad) == true)
+		{	
+			request.setAttribute("registroCorrecto", "true");
+			RequestDispatcher rd = request.getRequestDispatcher("registro.jsp");
 			rd.forward(request, response);
 		}
 		else
 		{
-			request.setAttribute("loginCorrecto", "false");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("registro.jsp");
 		}
 	}
 
-	private boolean validarLogin(String correo, String contrasena) 
+	private boolean validarRegistro(String correo, String contras, String nombre, String apellido, String ciudad) 
 	{
 		boolean res = true;
 		
 		return res;
 	}
+		
+	
 
 }
