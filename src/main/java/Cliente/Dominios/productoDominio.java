@@ -24,11 +24,11 @@ public class productoDominio implements Serializable {
 	private String titulo;
 	@Column(nullable = false, length = 30)
 	private String categoria;
-	@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 300)
 	private String descripcion;
-	@Column(nullable = false, length = 30)
-	private int precio;
 	@Column(nullable = false)
+	private int precio;
+	@Column(nullable = false ,length = 30)
 	private String estado;
 	
 	public productoDominio() {

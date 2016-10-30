@@ -26,7 +26,7 @@ public class clienteDominio implements Serializable {
 	private String apellidos;
 	@Column(nullable = false, length = 20)
 	private String contrasena;
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, unique=true, length = 100)
 	private String correo;
 	@Column(nullable = false, length = 40)
 	private String provincia;

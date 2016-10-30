@@ -3,12 +3,13 @@
 	<persistence-unit name="wallapoptiw" transaction-type="JTA">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>jdbc/tiw</jta-data-source>
+		<class>Cliente.Dominios.clienteDominio</class>
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE"/>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 			<property name="eclipselink.logging.parameters" value="true"/>
-			<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
 			<property name="eclipselink.jdbc.batch-writing" value="Buffered"/>
+			<property name="javax.persistence.schema-generation.create-source" value="script-then-metadata"/>
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -10,96 +10,69 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.persistence.Query;
+import javax.persistence.EntityManager;
+
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+
 import Cliente.Dominios.clienteDominio;
 
 
 public class clienteDAOImp implements clienteDAO {
-	private Connection con;
-	private ResourceBundle rb;
+	private EntityManager em;
+	private UserTransaction ut;
 	@Override
-	public Collection<clienteDominio> listarUsuarios() throws SQLException{
-		Statement st = con.createStatement();
-		ResultSet resultados = st.executeQuery(rb.getString("seleccionarTodosUsuarios"));
-		
-		List<clienteDominio> listaUsuarios = new ArrayList<clienteDominio>();
-		clienteDominio usuario;
-		while (resultados.next()) {
-			usuario = new clienteDominio();
-			usuario.setId(resultados.getInt("id"));
-			usuario.setNombre(resultados.getString("nombre"));
-			usuario.setContrasena(resultados.getString("contrasena"));
-			listaUsuarios.add(usuario);
-		}
-		return listaUsuarios;
+	public Collection<clienteDominio> listarClientes() throws SQLException{
+		return em.createQuery("select c from clienteDominio c", clienteDominio.class).getResultList();
 	}
 	@Override
-	public clienteDominio recuperarUnUsuarioPorClave(long pk) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(rb.getString("seleccionarUsuarioPK"));
-		ps.setLong(1, pk);
-		clienteDominio usuario = null;
-		ResultSet resultados = ps.executeQuery();
-		while (resultados.next()) {
-			usuario = new clienteDominio();
-			usuario.setId(resultados.getInt("id"));
-			usuario.setNombre(resultados.getString("nombre"));
-			usuario.setContrasena(resultados.getString("contrasena"));
-			
-		}
-		return usuario;
+	public clienteDominio recuperarUnClientePorClave(long pk) throws SQLException{
+		return em.find(clienteDominio.class, pk);
 	}
 	@Override
 	/**
 	 * Se asume que el campo nombre es unique y por tanto solo recuperará un usuario en caso de existir
 	 */
-	public clienteDominio recuperarUnUsuarioPorNombre(String nombre) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(rb.getString("seleccionarUsuarioNombre"));
-		ps.setString(1, nombre);
-		clienteDominio usuario = null;
-		ResultSet resultados = ps.executeQuery();
-		while (resultados.next()) {
-			usuario = new clienteDominio();
-			usuario.setId(resultados.getInt("id"));
-			usuario.setNombre(resultados.getString("nombre"));
-			usuario.setContrasena(resultados.getString("contrasena"));
-			
-		}
-		return usuario;
+	public clienteDominio recuperarUnClientePorCorreo(String correo) throws SQLException{
+
+		Query consulta = em.createQuery("select c from clienteDominio c where c.correo=:corr", clienteDominio.class);
+		consulta.setParameter("corr", correo);
+		return (clienteDominio) consulta.getResultList().get(0);
 	}
 	@Override
-	public clienteDominio crearUsuario(clienteDominio nuevoUsuario) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(rb.getString("crearUsuario"));
-		ps.setString(1, nuevoUsuario.getNombre());
-		ps.setString(2, nuevoUsuario.getContrasena());
-		ps.execute();
-		
-		return recuperarUnUsuarioPorNombre(nuevoUsuario.getNombre());
+	public clienteDominio crearCliente(clienteDominio nuevoCliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException{
+		ut.begin();
+		em.persist(nuevoCliente);
+		ut.commit();
+		em.flush();
+		return recuperarUnClientePorCorreo(nuevoCliente.getCorreo());
 	}
 	@Override
-	public void borrarUsuario(clienteDominio usuario) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(rb.getString("borrarUsuario"));
-		ps.setLong(1, usuario.getId());
-		ps.execute();
-		
+	public void borrarCliente(clienteDominio cliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+		ut.begin();
+		em.remove(em.merge(cliente));
+		ut.commit();
 	}
 	@Override
-	public clienteDominio actualizarUsuario(clienteDominio usuario) throws SQLException{
-		PreparedStatement ps = con.prepareStatement(rb.getString("actualizarUsuario"));
-		ps.setString(1, usuario.getNombre());
-		ps.setString(2, usuario.getContrasena());
-		ps.setLong(3, usuario.getId());
-		ps.execute();
-		return recuperarUnUsuarioPorClave(usuario.getId());
+	public clienteDominio actualizarCliente(clienteDominio cliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+		ut.begin();
+		em.merge(cliente);
+		ut.commit();
+		return recuperarUnClientePorClave(cliente.getId());
+	}
+	@Override
+	public void setConexion(EntityManager em) {
+		this.em = em;
 		
 	}
 	@Override
-	public void setConexion(Connection con) {
-		this.con = con;
-		
-	}
-	@Override
-	public void setQuerys(ResourceBundle rb) {
-		this.rb = rb;
-		
+	public void setTransaction(UserTransaction ut){
+		this.ut = ut;
 	}
 
 }

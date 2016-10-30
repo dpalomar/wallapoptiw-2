@@ -3,9 +3,16 @@
     <%boolean registroCorrecto = false;
     if(request.getAttribute("registroCorrecto") != null &&
     		   ((String) request.getAttribute("registroCorrecto")) == "true")
-    		{
-    			registroCorrecto = true;
-    		}
+    {
+    	registroCorrecto = true;
+    }
+    
+    boolean usuarioExixtente = false;
+    if(request.getAttribute("usuarioExixtente") != null &&
+    		   ((String) request.getAttribute("usuarioExixtente")) == "true")
+    {
+    	usuarioExixtente = true;
+    }
     
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -66,7 +73,7 @@
         alert("Por favor introduce tu ciudad de residencia");
 		return false;
     }
-	alert("Registro completado con éxito")
+	//alert("Registro completado con éxito")
 	return true;
 	
 	
@@ -102,13 +109,13 @@
 				</div><br><br>
 				
 				<fieldset id="personal"><legend>INFORMACIÓN DE USUARIO</legend><br>
-					<p>E-mail:<input type="email" id="email" class="email form-control" tabindex="1"><br><br></p>
-					<p>Contraseña:<input class="form-control" id="contra1" type="password" name="contra" tabindex="2"><br><br></p>
-					<p>Confirmación de contraseña:<input class="form-control" id="contra2" type="password" name="contraseña" tabindex="3"><br><br></p>
+					<p>E-mail:<input type="email" id="email" name="email" class="email form-control" tabindex="1"><br><br></p>
+					<p>Contraseña:<input class="form-control" id="contra1" type="password" name="contra1" tabindex="2"><br><br></p>
+					<p>Confirmación de contraseña:<input class="form-control" id="contra2" type="password" name="contrasena" tabindex="3"><br><br></p>
 				</fieldset><br><br>
 		
 				<fieldset><legend>INFORMACIÓN PERSONAL</legend><br>
-					<p>Nombre de Usuario:<input id="nomusu" class="form-control" type="text" name="nombre" tabindex="4"><br><br></p>
+					<p>Nombre de Usuario:<input id="nomusu" class="form-control" type="text" name="nomusu" tabindex="4"><br><br></p>
 					<p>Apellidos:<input id="apellidos" class="form-control" type="text" name="apellidos" tabindex="5"><br><br></p>
 					<p>Ciudad de residencia:
 					<select name="prov" id="prov" class="form-control">
@@ -169,6 +176,9 @@
 		</p><br><br>
 					
 				</fieldset><br><br>
+				<% if(usuarioExixtente) { %>
+				<div><p style="color:red;">El correo introducido ya existe.</p></div>
+				<% } %>
 				<input type="submit" value="Enviar" onclick="return validacion();" class="btn btn-info">
 		</form>
 	

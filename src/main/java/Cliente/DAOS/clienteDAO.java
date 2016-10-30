@@ -7,24 +7,31 @@ import java.util.ResourceBundle;
 
 import Cliente.Dominios.clienteDominio;
 
+import javax.persistence.EntityManager;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 public interface clienteDAO {
 
-	public abstract clienteDominio actualizarUsuario(clienteDominio usuario) throws SQLException;
+	public abstract clienteDominio actualizarCliente(clienteDominio cliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException;
 
-	public abstract void borrarUsuario(clienteDominio usuario) throws SQLException;
+	public abstract void borrarCliente(clienteDominio cliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException;
 
-	public abstract clienteDominio crearUsuario(clienteDominio nuevoUsuario) throws SQLException;
+	public abstract clienteDominio crearCliente(clienteDominio nuevoCliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException;
 
-	public abstract clienteDominio recuperarUnUsuarioPorNombre(String nombre) throws SQLException;
+	public abstract clienteDominio recuperarUnClientePorCorreo(String correo) throws SQLException;
 
-	public abstract clienteDominio recuperarUnUsuarioPorClave(long pk) throws SQLException;
+	public abstract clienteDominio recuperarUnClientePorClave(long pk) throws SQLException;
 
-	public abstract Collection<clienteDominio> listarUsuarios() throws SQLException;
+	public abstract Collection<clienteDominio> listarClientes() throws SQLException;
 
-	public abstract void setConexion(Connection con);
+	public abstract void setConexion(EntityManager em);
 
-	public abstract void setQuerys(ResourceBundle rb);
+	public abstract void setTransaction(UserTransaction ut);
 }
 	
 
