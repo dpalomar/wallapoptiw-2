@@ -109,7 +109,7 @@
 				</div><br><br>
 				
 				<fieldset id="personal"><legend>INFORMACIÓN DE USUARIO</legend><br>
-					<p>E-mail:<input type="email" id="email" name="email" class="email form-control" tabindex="1"><br><br></p>
+					<p>E-mail:<input type="text" id="email" name="email" class="email form-control" tabindex="1"><br><br></p>
 					<p>Contraseña:<input class="form-control" id="contra1" type="password" name="contra1" tabindex="2"><br><br></p>
 					<p>Confirmación de contraseña:<input class="form-control" id="contra2" type="password" name="contrasena" tabindex="3"><br><br></p>
 				</fieldset><br><br>

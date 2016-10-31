@@ -88,7 +88,6 @@ body {
 }
 
 .header h2{   
-		float: center;
 		text-align:center;
 		font-family: 'Cinzel', serif;	
 		font-size: 70px;
@@ -98,7 +97,6 @@ body {
 	}
 
 .header p{
-		float: center;
 		text-align:center;
 		font-family: 'Cinzel', serif;	
 		font-size: 25px;

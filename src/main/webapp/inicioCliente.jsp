@@ -71,6 +71,18 @@
       </a>
     </div>
 	
+	<table id="buscador">
+		<tr><td id="celda1"><b>Búsqueda rápida de productos</b></td></tr> 
+		<tr id="fila2">
+		<td id="celda2">
+		<span>Buscar producto:<input type="text" class="buscarProd"></span>
+		
+		<span><input type="button" value="Buscar" id="buscar" class="buscar btn btn-primary"></span><br><br>
+		</td> 
+		</tr>
+		<tr ><td id="avanzada"><a class="avanzada" href="catalogo.html">+ Búsqueda avanzada</a></td></tr>
+	</table><br><br>
+	
 	<table class="productos">
 		<tr>
 		<th></th>
@@ -100,8 +112,8 @@
 
    
    
-    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
    
     
     

@@ -210,6 +210,17 @@ input{
 	top: 5px;
 }
 
+.borrar{
+	margin-left: 240px;
+	margin-bottom: 30px;
+	font-size:20px;
+}
+
+.eliminarProducto{
+	margin-left: 220px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
 
 
 

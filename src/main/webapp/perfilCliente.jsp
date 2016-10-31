@@ -11,9 +11,10 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/perfilCliente.css" rel="stylesheet">
 	<link href="css/login.css" rel="stylesheet">
-	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-	<script>
+	<script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
 
 	/*Distintas pantallas que mostraremos con las opciones del menu*/					
 	function cambiaPantalla(menu){
@@ -22,7 +23,7 @@
 		if(estilo=="none"){
 			document.getElementById(menu).style.visibility='hidden';
 		}
-		/*Mostramos todo lo relacionado con la informaciÃ³n personal*/
+		/*Mostramos todo lo relacionado con la información personal*/
 		if(menu=="menu1"){
 			document.getElementById("informacionPersonal").style.visibility='visible';
 			document.getElementById("informacionPersonal").style.display='block';
@@ -89,16 +90,16 @@
 		return false;
 	}
 	if (email.length == 0){
-		alert("Por favor introduce tu direcciÃ³n de correo electrÃ³nico");
+		alert("Por favor introduce tu dirección de correo electrónico");
 		return false;
 	}
 	if (!expresion.test(email)){
-		alert("Por favor introduce una direcciÃ³n de correo electrÃ³nico vÃ¡lida");
+		alert("Por favor introduce una dirección de correo electrónico válida");
 		return false;
 	}
 	
 	if (contras1.length == 0){
-		alert("Por favor introduce tu contraseÃ±a");
+		alert("Por favor introduce tu contraseña");
 		return false;
 	}
 	}
@@ -159,26 +160,35 @@
 	$(document).ready(function(){	
 	$("#validar").click(function(){
 		var titulo = $(".tituloProducto").val();
-		var categoria = $(".categoria").val();
-		var descripcion = $(".descripcion").val();
-		var precio = $(".precio").val();
-		var estado = $(".estado").val();
+		var categoria = $("#categoria4").val();
+		var descripcion = $("#descripcion4").val();
+		var precio = $("#precio4").val();
+		var estado = $("#estado4").val();
+		var imagen = $("#imagen4").val();
 		if( titulo == "" ){
-			$(".tituloProducto").focus().after("<span class='error'>Introduzca un tÃ­tulo para el nuevo producto</span>");
-			return false;
-		}else if(categoria = ""){
-			$(".categoria").focus().after("<span class='error'>Introduzca un categoria para el nuevo producto</span>");
-			return false;
-		}else if( descripcion == ""){
-			$(".descripcion").focus().after("<span class='error'>Introduzca una descripciÃ³n para el nuevo producto</span>");
-			return false;
-		}else if(precio == ""){
-			$(".precio").focus().after("<span class='error'>Introduzca un precio para el nuevo producto</span>");
-			return false;
-		}else if(estado == ""){
-			$(".precio").focus().after("<span class='error'>Introduzca un estado para el nuevo producto</span>");
+			$(".tituloProducto").focus().after("<span class='error'>Introduzca un título para el nuevo producto<\/span>");
 			return false;
 		}
+		if(categoria == ""){
+			$("#categoria4").focus().after("<span class='error'>Introduzca una categoria para el nuevo producto<\/span>");
+			return false;
+		}
+		if( descripcion == ""){
+			$("#descripcion4").focus().after("<span class='error'>Introduzca una descripción para el nuevo producto<\/span>");
+			return false;
+		}
+		if(precio == ""){
+			$("#precio4").focus().after("<span class='error'>Introduzca un precio para el nuevo producto<\/span>");
+			return false;
+		}
+		if(estado == ""){
+			$("#estado4").focus().after("<span class='error'>Introduzca un estado para el nuevo producto<\/span>");
+			return false;
+		}
+		/*var nuevo_producto = "<div class='fav' id='fav2'>"+"<h4 class='tituloFav'>"+$('.tituloProducto').val()+"<\/h4>"+"<p>"+"Categoría:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='categoria' value='categoria' readonly>"+"<br>"+"<br>"+"<\/p>"+"<p>"+"Descripción:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='descripcion' value='descripcion1' readonly>"+"<br>"+"<br>"+"<\/p>"+"<img src='images/cajones.jpg' class='img-circle imagenesProductos'>"+"<p>"+"Precio:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='precio' value='precio' readonly>"+"<br>"+"<br>"+"<\/p>"+"<p>"+"Estado:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='estado' value='estado1' readonly>"+"<br>"+"<br>"+"<\/p>"+"<\/div>";
+		$('#fav4').append(nuevo_producto);		*/
+		
+		
 	});
 	});
 	
@@ -187,20 +197,33 @@
 		
 		document.getElementById('categoria1').value="Mobiliario";
 		document.getElementById('descripcion1').value="Mueble blanco de IKEA con cinco cajones.";
-		document.getElementById('precio1').value="45â¬";
+		document.getElementById('precio1').value="45 euros";
 		document.getElementById('estado1').value="Vendido";
 		
 		document.getElementById('categoria2').value="Vehiculos";
 		document.getElementById('descripcion2').value="Bicicleta de carretera Elektra Race.";
-		document.getElementById('precio2').value="340â¬";
+		document.getElementById('precio2').value="340 euros";
 		document.getElementById('estado2').value="Disponible";
 		
 		document.getElementById('categoria3').value="Mobiliario";
-		document.getElementById('descripcion3').value="SofÃ¡ blanco de esquina con almacenaje.";
-		document.getElementById('precio3').value="190â¬";
+		document.getElementById('descripcion3').value="Sofa blanco de esquina con almacenaje.";
+		document.getElementById('precio3').value="190 euros";
 		document.getElementById('estado3').value="Disponible";
 	
 	});
+	
+	function eliminar(){
+	confirm("¿Está seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
+	location.href = "login.html"
+	}
+	
+	
+	function eliminarProd(nombre1,nombre2,nombre3){
+	confirm("¿Está seguro que quiere dar de baja el producto?");
+	$(nombre1).remove();
+	$(nombre2).remove();
+	$(nombre3).remove();	
+	}
 	</script>
 	
   </head>
@@ -213,18 +236,18 @@
 		<p>Encuentra tu producto ideal</p>
       </div>
 
-	<nav>  <!--MENÃ IZQUIERDO-->
+	<div>  <!--MENÚ IZQUIERDO-->
 		<ul id="opcionesmenu" class="nav nav-pills nav-stacked">
-			<li  class="active" id='menu1' onclick="cambiaPantalla('menu1')" ><a href="#">InformaciÃ³n Personal</a></li>		
+			<li  class="active" id='menu1' onclick="cambiaPantalla('menu1')" ><a href="#">Información Personal</a></li>		
 			<li  class="noactive" id='menu2' onclick="cambiaPantalla('menu2')"><a href="#">Mis productos</a></li>	
 		</ul>
-	</nav>	
+	</div>	
 		
 	<table id='tabla'>
 		<tr>
 			<td>
 				<div id='informacionPersonal'>
-					<h1 class='titulo'>INFORMACIÃN PERSONAL</h1>
+					<h1 class='titulo'>INFORMACIÓN PERSONAL</h1>
 					
 					<button class='elim btn btn-warning' id='edit1' onclick='editar(datospersonales); editar(datosusuario);'>Editar</button>
 					<button class='cont btn btn-success' id='con1' onclick="validacion(); confirmar(datospersonales);confirmar(datosusuario);">Confirmar</button>
@@ -245,93 +268,81 @@
 						
 					<div id='datosusuario'>
 						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly"><br><br></p>
-						<p class='etiquetas' ><b>ContraseÃ±a:&nbsp;</b><input class="contraseÃ±a" name="contraseÃ±a" type="text" tabindex="5" id ='pass' readonly="readonly"><br><br></p>
+						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contraseÃ±a" name="contraseÃ±a" type="text" tabindex="5" id ='pass' readonly="readonly"><br><br></p>
 					</div>
+					<button class='btn btn-danger borrar' onclick="eliminar()">Darse de baja en la aplicación</button>
 				</div>
 					
-					
+			
+	
 				<div class="oculto" id="productos">
 					<h1 class='titulo'>MIS PRODUCTOS</h1>
-					<p class='etiqueta'>A continuaciÃ³n, se mostrarÃ¡n las productos que tiene puestos en venta. </p>
+					<p class='etiqueta'>A continuación, se mostrarán las productos que tiene puestos en venta. </p>
 					<p class='etiqueta'>Si desea modificar o dar de baja un producto pinche en editar.</p>
-					<p class='etiqueta'>Si desea aÃ±adir un nuevo producto pinche <a role="button" class="anadir btn btn-default" id="anadir">aquÃ­.</a></p>
+					<p class='etiqueta'>Si desea añadir un nuevo producto pinche <button class="anadir btn btn-default" id="anadir">aquí.</button></p>
 					
 					
 					<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
 					<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
 					<div class='fav' id='fav2'> 
 						<h4 class='tituloFav'>Cajonera Blanca IKEA</h4>
-						<p>CategorÃ­a:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly><br><br></p>
-						<p>DescripciÃ³n:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly><br><br></p>
+						<p>Categoría:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly><br><br></p>
+						<p>Descripción:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly><br><br></p>
 						<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">
 						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio1" readonly><br><br></p>
 						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado1" readonly><br><br></p>
+						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav2,edit2,con2)">Dar de baja el producto</button>
 					</div> 
 					
 					<button class='elim btn btn-warning' id='edit3' onclick='editarProd(fav3,edit3,con3)'>Editar</button>
 					<button class='cont btn btn-success' id='con3' onclick="confirmarProd(fav3,edit3,con3);">Confirmar</button>
 					<div class='fav' id='fav3'>
 						<h4 class='tituloFav'>Bicicleta de carretera</h4>
-						<p>CategorÃ­a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
-						<p>DescripciÃ³n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
+						<p>Categoría&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
+						<p>Descripción&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
 						<img src="images/bici.jpg" class="img-circle imagenesProductos" alt="Bicicleta">
 						<p>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio2" readonly="readonly"><br><br></p>
 						<p>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado2" readonly="readonly"><br><br></p>
+						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav3,edit3,con3)">Dar de baja el producto</button>
 					</div> 
 					
 					<button class='elim btn btn-warning' id='edit4' onclick='editarProd(fav4,edit4,con4)'>Editar</button>
 					<button class='cont btn btn-success' id='con4' onclick="confirmarProd(fav4,edit4, con4);">Confirmar</button>
 					<div class='fav' id='fav4'> 
-						<h4 class='tituloFav'>SofÃ¡ de esquina</h4>
-						<p>CategorÃ­a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria3" readonly="readonly"><br><br></p>
-						<p>DescripciÃ³n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion3" readonly="readonly"><br><br></p>
+						<h4 class='tituloFav'>Sofa de esquina</h4>
+						<p>Categoría&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria3" readonly="readonly"><br><br></p>
+						<p>Descripción&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion3" readonly="readonly"><br><br></p>
 						<img src="images/sofa.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
 						<p>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio3" readonly="readonly"><br><br></p>
 						<p>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado3" readonly="readonly"><br><br></p>						
+						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav4,edit4,con4)">Dar de baja el producto</button>
 					</div><br><br>
 					
-					<form id="formulario">
+					<form id="formulario" action="" method="POST">
 						<table id="tabla2"> 
-							<tr id="fila1"><td id="celda1"><b>AÃ±ade un nuevo producto</b></td></tr> 
+							<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
 							<tr id="fila2"> 
 							<td><br>
 								<label>Titulo&nbsp;&nbsp;&nbsp;<input type="text" class="tituloProducto"><br><br></label>
-								<label>CategorÃ­a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria4"><br><br></label>
-								<label>DescripciÃ³n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion4"><br><br></label>
-								<label>Imagen&nbsp;&nbsp;&nbsp;<input type="text" class="imagen" id="imagen4"><br><br></label>
+								<label>Categoría&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria4"><br><br></label>
+								<label>Descripción&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion4"><br><br></label>
+								<label>Imagen&nbsp;&nbsp;&nbsp;<input id="imagen4" type="file" accept="image/*"><br><br></label>
 								<label>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio4"><br><br></label>
-								<label>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado"><br><br></label>
-								<label><button class='validar btn btn-info' id='validar'>AÃ±adir</button></label><br>
+								<label>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado4"><br><br></label>
+								<label><button class='validar btn btn-info' id='validar'>Añadir</button></label><br>
 							</td>   
 							</tr> 
 						</table>
 					</form>
-
-					
 					</div>
 				</td>
 				</tr>
 			</table>
-			
-		
-		
 
-
-
-    
     <div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>
     </div>
-
     </div>
-
-
-   
-   
-    
-   
-    
-    
   </body>
 </html>
-    
+	    
