@@ -4,12 +4,14 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>jdbc/tiw</jta-data-source>
 		<class>Cliente.Dominios.clienteDominio</class>
+		<class>Cliente.Dominios.productoDominio</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
 		<properties>
 			<property name="eclipselink.logging.level" value="FINE"/>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			<property name="javax.persistence.schema-generation.database.action" value="create"/>
 			<property name="eclipselink.logging.parameters" value="true"/>
-			<property name="eclipselink.jdbc.batch-writing" value="Buffered"/>
-			<property name="javax.persistence.schema-generation.create-source" value="script-then-metadata"/>
+<!-- 			<property name="eclipselink.jdbc.batch-writing" value="Buffered"/> -->
 		</properties>
 	</persistence-unit>
 </persistence>

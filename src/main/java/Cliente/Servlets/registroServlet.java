@@ -26,10 +26,10 @@ import Cliente.Dominios.clienteDominio;
 @WebServlet("/registroServlet")
 public class registroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ServletConfig config;
+	//private ServletConfig config;
 	private clienteDAO dao;
 	private Connection con;
-	private static final String ALTA="ALTA",EDITAR="EDITAR",BORRAR="BORRAR";
+	//private static final String ALTA="ALTA",EDITAR="EDITAR",BORRAR="BORRAR";
     @PersistenceContext(unitName="wallapoptiw")
     EntityManager em;
     @Resource
@@ -44,58 +44,11 @@ public class registroServlet extends HttpServlet {
     }
     
     public void init(ServletConfig config) throws ServletException {
-		this.config = config;
+		//this.config = config;
 		
 		dao = new clienteDAOImp();
 		dao.setConexion(em);
 		dao.setTransaction(ut);
-		
-		
-
-		clienteDominio u1 = new clienteDominio();
-		clienteDominio u2 = new clienteDominio();
-		clienteDominio u3 = new clienteDominio();
-		clienteDominio u4 = new clienteDominio();
-		
-		u1.setNombre("Usu1");
-		u1.setApellidos("Ape1");
-		u1.setCorreo("cor1@cor.es");
-		u1.setContrasena("1234");
-		u1.setProvincia("1");
-		
-		u2.setNombre("Usu2");
-		u2.setApellidos("Ape2");
-		u2.setCorreo("cor2@cor.es");
-		u2.setContrasena("1234");
-		u2.setProvincia("1");
-		
-		u3.setNombre("Usu3");
-		u3.setApellidos("Ape3");
-		u3.setCorreo("cor3@cor.es");
-		u3.setContrasena("1234");
-		u3.setProvincia("1");
-		
-		u4.setNombre("Usu4");
-		u4.setApellidos("Ape4");
-		u4.setCorreo("cor4@cor.es");
-		u4.setContrasena("1234");
-		u4.setProvincia("1");
-		
-		try {
-			ut.begin();
-			em.persist(u1);
-			em.persist(u2);
-			em.persist(u3);
-			em.persist(u4);
-			
-
-			ut.commit();
-
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
 	}
     
     public void destroy() {

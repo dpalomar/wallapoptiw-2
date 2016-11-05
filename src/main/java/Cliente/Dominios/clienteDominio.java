@@ -4,6 +4,9 @@ import static javax.persistence.GenerationType.AUTO;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.SEQUENCE;
+import static javax.persistence.GenerationType.TABLE;
 
 /**
  * Entity implementation class for Entity: clienteDominio
@@ -20,15 +23,15 @@ public class clienteDominio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = AUTO)
 	private long id;
-	@Column(nullable = false, length = 30)
+	//@Column(length = 30, nullable = false)
 	private String nombre;
-	@Column(nullable = false, length = 30)
+	//@Column(nullable = false, length = 30)
 	private String apellidos;
-	@Column(nullable = false, length = 20)
+	//@Column(nullable = false, length = 20)
 	private String contrasena;
-	@Column(nullable = false, unique=true, length = 100)
+	//@Column(nullable = false, length = 100, unique = true)
 	private String correo;
-	@Column(nullable = false, length = 40)
+	//@Column(nullable = false, length = 40)
 	private String provincia;
 	
 	public clienteDominio() {

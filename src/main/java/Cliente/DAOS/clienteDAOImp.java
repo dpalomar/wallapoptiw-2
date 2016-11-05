@@ -1,14 +1,8 @@
 package Cliente.DAOS;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -40,16 +34,21 @@ public class clienteDAOImp implements clienteDAO {
 	 */
 	public clienteDominio recuperarUnClientePorCorreo(String correo) throws SQLException{
 
+		clienteDominio res = null;
 		Query consulta = em.createQuery("select c from clienteDominio c where c.correo=:corr", clienteDominio.class);
 		consulta.setParameter("corr", correo);
-		return (clienteDominio) consulta.getResultList().get(0);
+		List list = consulta.getResultList();
+		if(list != null && list.size() > 0) {
+			res = (clienteDominio) list.get(0); 
+		}
+		return res;
 	}
 	@Override
 	public clienteDominio crearCliente(clienteDominio nuevoCliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException{
 		ut.begin();
 		em.persist(nuevoCliente);
-		ut.commit();
 		em.flush();
+		ut.commit();
 		return recuperarUnClientePorCorreo(nuevoCliente.getCorreo());
 	}
 	@Override

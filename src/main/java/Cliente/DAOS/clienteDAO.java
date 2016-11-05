@@ -1,9 +1,8 @@
 package Cliente.DAOS;
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.ResourceBundle;
 
 import Cliente.Dominios.clienteDominio;
 

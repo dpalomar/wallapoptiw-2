@@ -7,11 +7,11 @@
     	registroCorrecto = true;
     }
     
-    boolean usuarioExixtente = false;
-    if(request.getAttribute("usuarioExixtente") != null &&
-    		   ((String) request.getAttribute("usuarioExixtente")) == "true")
+    boolean usuarioExistente = false;
+    if(request.getAttribute("usuarioExistente") != null &&
+    		   ((String) request.getAttribute("usuarioExistente")) == "true")
     {
-    	usuarioExixtente = true;
+    	usuarioExistente = true;
     }
     
     %>
@@ -176,7 +176,7 @@
 		</p><br><br>
 					
 				</fieldset><br><br>
-				<% if(usuarioExixtente) { %>
+				<% if(usuarioExistente) { %>
 				<div><p style="color:red;">El correo introducido ya existe.</p></div>
 				<% } %>
 				<input type="submit" value="Enviar" onclick="return validacion();" class="btn btn-info">
