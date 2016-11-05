@@ -97,7 +97,7 @@
 		
 		<h2>Crea tu cuenta en "WALLAPOP"</h2>
 		
-		<form id="formulario" action="registroServlet" method="post">
+		<form id="formulario" action="registro" method="post">
 		
 
 				<div id="info">

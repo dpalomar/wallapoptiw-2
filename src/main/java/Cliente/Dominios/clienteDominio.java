@@ -3,10 +3,9 @@ package Cliente.Dominios;
 import static javax.persistence.GenerationType.AUTO;
 
 import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.*;
-import static javax.persistence.GenerationType.IDENTITY;
-import static javax.persistence.GenerationType.SEQUENCE;
-import static javax.persistence.GenerationType.TABLE;
 
 /**
  * Entity implementation class for Entity: clienteDominio
@@ -16,24 +15,46 @@ import static javax.persistence.GenerationType.TABLE;
 @Table(name="USUARIOS")
 public class clienteDominio implements Serializable {
 
+	enum provincias {
+		MADRID (1),
+		VALENCIA (2);
+		
+		private final int value;
+		
+		provincias(int value){
+			this.value = value;
+		}
+
+		public static provincias getProvincia(int provinciaIndex) {
+		   for (provincias p : provincias.values()) {
+		       if (p.value == provinciaIndex) return p;
+		   }
+		   throw new IllegalArgumentException("Provincia no encontrada.");
+		}
+		
+	}
 	
 	private static final long serialVersionUID = 1L;
-	
+
+
 
 	@Id
 	@GeneratedValue(strategy = AUTO)
 	private long id;
-	//@Column(length = 30, nullable = false)
+	@Column(length = 30, nullable = false)
 	private String nombre;
-	//@Column(nullable = false, length = 30)
+	@Column(nullable = false, length = 30)
 	private String apellidos;
-	//@Column(nullable = false, length = 20)
+	@Column(nullable = false, length = 20)
 	private String contrasena;
-	//@Column(nullable = false, length = 100, unique = true)
+	@Column(nullable = false, length = 100, unique = true)
 	private String correo;
-	//@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 40)
 	private String provincia;
-	
+
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="duenoProducto")
+    private Set<productoDominio> productos; 
+    
 	public clienteDominio() {
 		super();
 	}

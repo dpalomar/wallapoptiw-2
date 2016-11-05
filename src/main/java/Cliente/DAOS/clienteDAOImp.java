@@ -28,6 +28,7 @@ public class clienteDAOImp implements clienteDAO {
 	public clienteDominio recuperarUnClientePorClave(long pk) throws SQLException{
 		return em.find(clienteDominio.class, pk);
 	}
+	@SuppressWarnings("rawtypes")
 	@Override
 	/**
 	 * Se asume que el campo nombre es unique y por tanto solo recuperará un usuario en caso de existir

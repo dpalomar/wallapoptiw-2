@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.AUTO;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
 /**
  * Entity implementation class for Entity: productoDominio
  *
@@ -17,6 +18,38 @@ public class productoDominio implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+
+	enum TipoCategoria {
+		TECNOLOGIA (1, "Tecnología"),
+		ROPA_INFANTIL (2, "Ropa infantil");
+		
+		private final int value;
+		private final String descripcion;
+		
+		TipoCategoria(int value, String descripcion){
+			this.value = value;
+			this.descripcion = descripcion;
+		}
+
+		public String getDescripcion() {
+			return this.descripcion;
+		}
+		
+		public static TipoCategoria getCategoria(int categoriaIndex) {
+		   for (TipoCategoria c : TipoCategoria.values()) {
+		       if (c.value == categoriaIndex) return c;
+		   }
+		   throw new IllegalArgumentException("Categoría no encontrada.");
+		}
+
+		public static TipoCategoria getCategoria(String categoriaNombre) {
+		   for (TipoCategoria c : TipoCategoria.values()) {
+		       if (c.descripcion.equals(categoriaNombre)) return c;
+		   }
+		   throw new IllegalArgumentException("Categoría no encontrada.");
+		}
+	}
+	
 	@Id
 	@GeneratedValue(strategy = AUTO)
 	private long id;
@@ -28,20 +61,26 @@ public class productoDominio implements Serializable {
 	private String descripcion;
 	@Column(nullable = false)
 	private int precio;
-	@Column(nullable = false ,length = 30)
-	private String estado;
+	@Column(nullable = false)
+	private boolean estado;
+
+    @ManyToOne
+    @JoinColumn(name="clienteId", nullable=false)
+	private clienteDominio duenoProducto;
+	
 	
 	public productoDominio() {
 		super();
 	}
 
-	public productoDominio(String titulo, String categoria, String descripcion, int precio, String estado) {
+	public productoDominio(String titulo, String categoria, String descripcion, int precio, boolean estado, clienteDominio duenoProducto) {
 		super();
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.estado = estado;
+		this.duenoProducto = duenoProducto;
 	}
 
 	public long getId() {
@@ -84,15 +123,21 @@ public class productoDominio implements Serializable {
 		this.precio = precio;
 	}
 
-	public String getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+	public clienteDominio getDuenoProducto() {
+		return duenoProducto;
+	}
+
+	public void setDuenoProducto(clienteDominio duenoProducto) {
+		this.duenoProducto = duenoProducto;
+	}
 	
-	
-	
-	
+		
 }

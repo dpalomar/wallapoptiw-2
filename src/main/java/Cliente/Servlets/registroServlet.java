@@ -23,13 +23,11 @@ import Cliente.Dominios.clienteDominio;
 /**
  * Servlet implementation class registroServlet
  */
-@WebServlet("/registroServlet")
+@WebServlet("/registro")
 public class registroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private ServletConfig config;
 	private clienteDAO dao;
 	private Connection con;
-	//private static final String ALTA="ALTA",EDITAR="EDITAR",BORRAR="BORRAR";
     @PersistenceContext(unitName="wallapoptiw")
     EntityManager em;
     @Resource
@@ -66,7 +64,8 @@ public class registroServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("registro.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("registro.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
