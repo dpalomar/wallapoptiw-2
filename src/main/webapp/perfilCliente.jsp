@@ -90,16 +90,16 @@
 		return false;
 	}
 	if (email.length == 0){
-		alert("Por favor introduce tu direcci√≥n de correo electr√≥nico");
+		alert("Por favor introduce tu direcciÛn de correo electrÛnico");
 		return false;
 	}
 	if (!expresion.test(email)){
-		alert("Por favor introduce una direcci√≥n de correo electr√≥nico v√°lida");
+		alert("Por favor introduce una direcciÛn de correo electrÛnico v·lida");
 		return false;
 	}
 	
 	if (contras1.length == 0){
-		alert("Por favor introduce tu contrase√±a");
+		alert("Por favor introduce tu contraseÒa");
 		return false;
 	}
 	}
@@ -166,7 +166,7 @@
 		var estado = $("#estado4").val();
 		var imagen = $("#imagen4").val();
 		if( titulo == "" ){
-			$(".tituloProducto").focus().after("<span class='error'>Introduzca un t√≠tulo para el nuevo producto<\/span>");
+			$(".tituloProducto").focus().after("<span class='error'>Introduzca un tÌtulo para el nuevo producto<\/span>");
 			return false;
 		}
 		if(categoria == ""){
@@ -174,7 +174,7 @@
 			return false;
 		}
 		if( descripcion == ""){
-			$("#descripcion4").focus().after("<span class='error'>Introduzca una descripci√≥n para el nuevo producto<\/span>");
+			$("#descripcion4").focus().after("<span class='error'>Introduzca una descripciÛn para el nuevo producto<\/span>");
 			return false;
 		}
 		if(precio == ""){
@@ -213,13 +213,13 @@
 	});
 	
 	function eliminar(){
-	confirm("¬øEst√° seguro que quiere darse de baja en la aplicaci√≥n? Al hacerlo se le eliminaran autom√°ticamente los productos que tiene puestos en su perfil.");
-	location.href = "login.html"
+	confirm("øEsta seguro que quiere darse de baja en la aplicaciÛn? Al hacerlo se le eliminaran autom·ticamente los productos que tiene puestos en su perfil.");
+	location.href = "login.jsp"
 	}
 	
 	
 	function eliminarProd(nombre1,nombre2,nombre3){
-	confirm("¬øEst√° seguro que quiere dar de baja el producto?");
+	confirm("øEsta seguro que quiere dar de baja el producto?");
 	$(nombre1).remove();
 	$(nombre2).remove();
 	$(nombre3).remove();	
@@ -236,9 +236,9 @@
 		<p>Encuentra tu producto ideal</p>
       </div>
 
-	<div>  <!--MEN√ö IZQUIERDO-->
+	<div> 
 		<ul id="opcionesmenu" class="nav nav-pills nav-stacked">
-			<li  class="active" id='menu1' onclick="cambiaPantalla('menu1')" ><a href="#">Informaci√≥n Personal</a></li>		
+			<li  class="active" id='menu1' onclick="cambiaPantalla('menu1')" ><a href="#">InformaciÛn Personal</a></li>		
 			<li  class="noactive" id='menu2' onclick="cambiaPantalla('menu2')"><a href="#">Mis productos</a></li>	
 		</ul>
 	</div>	
@@ -247,7 +247,7 @@
 		<tr>
 			<td>
 				<div id='informacionPersonal'>
-					<h1 class='titulo'>INFORMACI√ìN PERSONAL</h1>
+					<h1 class='titulo'>INFORMACI”N PERSONAL</h1>
 					
 					<button class='elim btn btn-warning' id='edit1' onclick='editar(datospersonales); editar(datosusuario);'>Editar</button>
 					<button class='cont btn btn-success' id='con1' onclick="validacion(); confirmar(datospersonales);confirmar(datosusuario);">Confirmar</button>
@@ -268,26 +268,26 @@
 						
 					<div id='datosusuario'>
 						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly"><br><br></p>
-						<p class='etiquetas' ><b>Contrase√±a:&nbsp;</b><input class="contrase√É¬±a" name="contrase√É¬±a" type="text" tabindex="5" id ='pass' readonly="readonly"><br><br></p>
+						<p class='etiquetas' ><b>ContraseÒa:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly"><br><br></p>
 					</div>
-					<button class='btn btn-danger borrar' onclick="eliminar()">Darse de baja en la aplicaci√≥n</button>
+					<button class='btn btn-danger borrar' onclick="eliminar()">Darse de baja en la aplicaciÛn</button>
 				</div>
 					
 			
 	
 				<div class="oculto" id="productos">
 					<h1 class='titulo'>MIS PRODUCTOS</h1>
-					<p class='etiqueta'>A continuaci√≥n, se mostrar√°n las productos que tiene puestos en venta. </p>
+					<p class='etiqueta'>A continuacion, se mostraran las productos que tiene puestos en venta. </p>
 					<p class='etiqueta'>Si desea modificar o dar de baja un producto pinche en editar.</p>
-					<p class='etiqueta'>Si desea a√±adir un nuevo producto pinche <button class="anadir btn btn-default" id="anadir">aqu√≠.</button></p>
+					<p class='etiqueta'>Si desea aÒadir un nuevo producto pinche <button class="anadir btn btn-default" id="anadir">aquÌ.</button></p>
 					
 					
 					<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
 					<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
 					<div class='fav' id='fav2'> 
 						<h4 class='tituloFav'>Cajonera Blanca IKEA</h4>
-						<p>Categor√≠a:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly><br><br></p>
-						<p>Descripci√≥n:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly><br><br></p>
+						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly><br><br></p>
+						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly><br><br></p>
 						<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">
 						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio1" readonly><br><br></p>
 						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado1" readonly><br><br></p>
@@ -298,11 +298,11 @@
 					<button class='cont btn btn-success' id='con3' onclick="confirmarProd(fav3,edit3,con3);">Confirmar</button>
 					<div class='fav' id='fav3'>
 						<h4 class='tituloFav'>Bicicleta de carretera</h4>
-						<p>Categor√≠a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
-						<p>Descripci√≥n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
+						<p>Categoria&:nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
+						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
 						<img src="images/bici.jpg" class="img-circle imagenesProductos" alt="Bicicleta">
-						<p>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio2" readonly="readonly"><br><br></p>
-						<p>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado2" readonly="readonly"><br><br></p>
+						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio2" readonly="readonly"><br><br></p>
+						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado2" readonly="readonly"><br><br></p>
 						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav3,edit3,con3)">Dar de baja el producto</button>
 					</div> 
 					
@@ -310,26 +310,26 @@
 					<button class='cont btn btn-success' id='con4' onclick="confirmarProd(fav4,edit4, con4);">Confirmar</button>
 					<div class='fav' id='fav4'> 
 						<h4 class='tituloFav'>Sofa de esquina</h4>
-						<p>Categor√≠a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria3" readonly="readonly"><br><br></p>
-						<p>Descripci√≥n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion3" readonly="readonly"><br><br></p>
+						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria3" readonly="readonly"><br><br></p>
+						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion3" readonly="readonly"><br><br></p>
 						<img src="images/sofa.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
-						<p>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio3" readonly="readonly"><br><br></p>
-						<p>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado3" readonly="readonly"><br><br></p>						
+						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio3" readonly="readonly"><br><br></p>
+						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado3" readonly="readonly"><br><br></p>						
 						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav4,edit4,con4)">Dar de baja el producto</button>
 					</div><br><br>
 					
 					<form id="formulario" action="" method="POST">
 						<table id="tabla2"> 
-							<tr id="fila1"><td id="celda1"><b>A√±ade un nuevo producto</b></td></tr> 
+							<tr id="fila1"><td id="celda1"><b>AÒade un nuevo producto</b></td></tr> 
 							<tr id="fila2"> 
 							<td><br>
 								<label>Titulo&nbsp;&nbsp;&nbsp;<input type="text" class="tituloProducto"><br><br></label>
-								<label>Categor√≠a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria4"><br><br></label>
-								<label>Descripci√≥n&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion4"><br><br></label>
+								<label>Categori≠a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria4"><br><br></label>
+								<label>Descripcion&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion4"><br><br></label>
 								<label>Imagen&nbsp;&nbsp;&nbsp;<input id="imagen4" type="file" accept="image/*"><br><br></label>
 								<label>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio4"><br><br></label>
 								<label>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado4"><br><br></label>
-								<label><button class='validar btn btn-info' id='validar'>A√±adir</button></label><br>
+								<label><button class='validar btn btn-info' id='validar'>AÒadir</button></label><br>
 							</td>   
 							</tr> 
 						</table>

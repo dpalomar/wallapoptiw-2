@@ -61,8 +61,8 @@ public class productoDominio implements Serializable {
 	private String descripcion;
 	@Column(nullable = false)
 	private int precio;
-	@Column(nullable = false)
-	private boolean estado;
+	@Column(nullable = false, length = 30)
+	private String estado;
 
     @ManyToOne
     @JoinColumn(name="clienteId", nullable=false)
@@ -73,7 +73,7 @@ public class productoDominio implements Serializable {
 		super();
 	}
 
-	public productoDominio(String titulo, String categoria, String descripcion, int precio, boolean estado, clienteDominio duenoProducto) {
+	public productoDominio(String titulo, String categoria, String descripcion, int precio, String estado, clienteDominio duenoProducto) {
 		super();
 		this.titulo = titulo;
 		this.categoria = categoria;
@@ -123,11 +123,11 @@ public class productoDominio implements Serializable {
 		this.precio = precio;
 	}
 
-	public boolean getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 

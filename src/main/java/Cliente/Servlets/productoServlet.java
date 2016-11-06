@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.RollbackException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,8 +20,7 @@ import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
-import Cliente.DAOS.clienteDAO;
-import Cliente.DAOS.clienteDAOImp;
+
 import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
 import Cliente.Dominios.productoDominio;
@@ -60,7 +58,46 @@ public class productoServlet extends HttpServlet {
   		daoProducto = new productoDAOImp();
   		daoProducto.setConexion(em);
   		daoProducto.setTransaction(ut);
-  	}
+  		
+  		productoDominio p1 = new productoDominio();
+  		productoDominio p2 = new productoDominio();
+   	 	productoDominio p3 = new productoDominio();
+   	 
+   	 	p1.setTitulo("Cajonera Blanca IKEA");
+   	 	p1.setCategoria("Mobiliario");
+   	 	p1.setDescripcion("Mueble blanco de IKEA con cinco cajones");
+   	 	p1.setPrecio(45);
+   	 	p1.setEstado("Vendido");
+   	 
+   	 	p2.setTitulo("Bicicleta de carretera");
+   	 	p2.setCategoria("Vehiculos");
+   	 	p2.setDescripcion("Bicicleta de carretera Elektra Race");
+   	 	p2.setPrecio(340);
+   	 	p2.setEstado("Disponible");
+   	 
+   	 	p3.setTitulo("Sofa de esquina");
+   	 	p3.setCategoria("Mobiliario");
+   	 	p3.setDescripcion("Sofa blanco de esquina con almacenaje");
+   	 	p3.setPrecio(190);
+   	 	p3.setEstado("Disponible");
+   	 	
+   	 try {
+ 	 	ut.begin();
+ 	 	
+ 	 	em.persist(p1);
+ 	 	em.persist(p2);
+ 	 	em.persist(p3);
+ 	 	
+ 	 	ut.commit();
+ 	 
+ 	 } catch (Exception e1) {
+ 	 // TODO Auto-generated catch block
+ 	 e1.printStackTrace();
+ 	 }
+ 	 		
+ 	 
+ 	 }
+  	
     
     public void destroy() {
 		try {
