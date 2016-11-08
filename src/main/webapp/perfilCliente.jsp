@@ -345,21 +345,29 @@
 						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado3" readonly="readonly"><br><br></p>						
 						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav4,edit4,con4)">Dar de baja el producto</button>
 					</div><br><br>
-					
-					<table id="tabla2"> 
-							<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
-							<tr id="fila2"> 
-							<td><br>
-								<label>Titulo&nbsp;&nbsp;&nbsp;<input type="text" class="tituloProducto"><br><br></label>
-								<label>Categori­a&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria4"><br><br></label>
-								<label>Descripcion&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion4"><br><br></label>
-								<label>Imagen&nbsp;&nbsp;&nbsp;<input id="imagen4" type="file" accept="image/*"><br><br></label>
-								<label>Precio&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio4"><br><br></label>
-								<label>Estado&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado4"><br><br></label>
-								<label><button class='validar btn btn-info' id='validar'>Añadir</button></label><br>
-							</td>   
-							</tr> 
-					</table>
+					<form id="formAlta" action="productos?accion=alta" method="post" >
+						<table id="tabla2"> 
+								<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
+								<tr id="fila2"> 
+								<td><br>
+									<label>Titulo&nbsp;&nbsp;&nbsp;
+										<input type="text" name="titulo" class="tituloProducto"><br><br></label>
+									<label>Categori­a&nbsp;&nbsp;&nbsp;
+										<input type="text" name="categoria" class="categoria" id="categoria4"><br><br></label>
+									<label>Descripcion&nbsp;&nbsp;&nbsp;
+										<input type="text" name="descripcion" class="descripcion" id="descripcion4"><br><br></label>
+									<label>Imagen&nbsp;&nbsp;&nbsp;
+										<input id="imagen4" name="imagen" type="file" accept="image/*"><br><br></label>
+									<label>Precio&nbsp;&nbsp;&nbsp;
+										<input type="text" name="precio" class="precio" id="precio4"><br><br></label>
+									<label>Estado&nbsp;&nbsp;&nbsp;
+										<input type="text" name="estado" class="estado" id="estado4"><br><br></label>
+									<label>
+										<button type="submit" class='validar btn btn-info' id='validar'>Añadir</button></label><br>
+								</td>   
+								</tr> 
+						</table>
+					</form>
 					
 					</div>
 				</td>
