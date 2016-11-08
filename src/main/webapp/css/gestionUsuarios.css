@@ -6,9 +6,22 @@
 	font-family: 'Philosopher', sans-serif;
 }
 
-.fila1{
+.table{
 	
 	font-weight: bold;	
 	color: #353C63;
 	font-size:18px;
+}
+
+div.table 
+{
+    display:table;
+}
+form.tr
+{
+    display:table-row;
+}
+span.td
+{
+    display:table-cell;
 }

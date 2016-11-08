@@ -124,6 +124,11 @@
 		document.getElementById('descripcion3').readOnly=false;
 		document.getElementById('precio3').readOnly=false;
 		document.getElementById('estado3').readOnly=false;
+		}else if (boton1 == edit5){
+		document.getElementById('categoria5').readOnly=false;
+		document.getElementById('descripcion5').readOnly=false;
+		document.getElementById('precio5').readOnly=false;
+		document.getElementById('estado5').readOnly=false;
 		}
 		
 	};
@@ -148,53 +153,18 @@
 		document.getElementById('descripcion3').readOnly=true;
 		document.getElementById('precio3').readOnly=true;
 		document.getElementById('estado3').readOnly=true;
+		}else if(boton1 == edit5){
+		document.getElementById('categoria5').readOnly=true;
+		document.getElementById('descripcion5').readOnly=true;
+		document.getElementById('precio5').readOnly=true;
+		document.getElementById('estado5').readOnly=true;
 		}
 	};
 	
 	$(document).ready(function(){
-	$(".anadir").click(function(){
+	$("#anadir").click(function(){
 		$("#tabla2").toggle();
 	});
-	});
-		
-	$(document).ready(function(){	
-	$("#validar").click(function(){
-		var titulo = $(".tituloProducto").val();
-		var categoria = $("#categoria4").val();
-		var descripcion = $("#descripcion4").val();
-		var precio = $("#precio4").val();
-		var estado = $("#estado4").val();
-		var imagen = $("#imagen4").val();
-		if( titulo == "" ){
-			$(".tituloProducto").focus().after("<span class='error'>Introduzca un título para el nuevo producto<\/span>");
-			return false;
-		}
-		if(categoria == ""){
-			$("#categoria4").focus().after("<span class='error'>Introduzca una categoria para el nuevo producto<\/span>");
-			return false;
-		}
-		if( descripcion == ""){
-			$("#descripcion4").focus().after("<span class='error'>Introduzca una descripción para el nuevo producto<\/span>");
-			return false;
-		}
-		if(precio == ""){
-			$("#precio4").focus().after("<span class='error'>Introduzca un precio para el nuevo producto<\/span>");
-			return false;
-		}
-		if(estado == ""){
-			$("#estado4").focus().after("<span class='error'>Introduzca un estado para el nuevo producto<\/span>");
-			return false;
-		}
-		/*var nuevo_producto = "<div class='fav' id='fav2'>"+"<h4 class='tituloFav'>"+$('.tituloProducto').val()+"<\/h4>"+"<p>"+"CategorÃ­a:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='categoria' value='categoria' readonly>"+"<br>"+"<br>"+"<\/p>"+"<p>"+"DescripciÃ³n:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='descripcion' value='descripcion1' readonly>"+"<br>"+"<br>"+"<\/p>"+"<img src='images/cajones.jpg' class='img-circle imagenesProductos'>"+"<p>"+"Precio:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='precio' value='precio' readonly>"+"<br>"+"<br>"+"<\/p>"+"<p>"+"Estado:&nbsp;&nbsp;&nbsp;"+"<input type='text' class='estado' value='estado1' readonly>"+"<br>"+"<br>"+"<\/p>"+"<\/div>";
-		$('#fav4').append(nuevo_producto);		*/
-		
-		
-	});
-	});
-	
-	
-	$(document).ready(function(){ 
-		
 		document.getElementById('categoria1').value="Mobiliario";
 		document.getElementById('descripcion1').value="Mueble blanco de IKEA con cinco cajones.";
 		document.getElementById('precio1').value="45 euros";
@@ -211,6 +181,61 @@
 		document.getElementById('estado3').value="Disponible";
 	
 	});
+		
+	$(document).ready(function(){
+	var iCnt = 4;
+	$("#validar").click(function(){
+		var titulo = $(".tituloProducto").val();
+		var categoria = $("#categoria4").val();
+		var descripcion = $("#descripcion4").val();
+		var precio = $("#precio4").val();
+		var estado = $("#estado4").val();
+		var imagen = $("#imagen4").val();
+		if( titulo == "" ){
+			alert("Introduzca un título para el nuevo producto");
+			return false;
+		}
+		if(categoria == ""){
+			alert("Introduzca una categoria para el nuevo producto");
+			return false;
+		}
+		if( descripcion == ""){
+			alert("Introduzca una descripción para el nuevo producto");
+			return false;
+		}
+		if(precio == ""){
+			alert("Introduzca un precio para el nuevo producto");
+			return false;
+		}
+		if(estado == ""){
+			alert("Introduzca un estado para el nuevo producto");
+			return false;
+		}
+ 
+		iCnt = iCnt + 1;
+		var container = $(document.createElement('div')).attr('class', 'fav').attr('id', 'fav' + iCnt);
+		
+		$(container).prepend('<button class="elim btn btn-warning" id=edit'+ iCnt + ' '  + 'onclick="editarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Editar<\/button>');
+		$(container).prepend('<button class="cont btn btn-success" id=con'+ iCnt + ' '  + 'onclick="confirmarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Confirmar<\/button>');
+		
+		$(container).append('<h4 class="tituloFav">'+ titulo + '<\/h4>');
+		$(container).append('<p>Categoria:<input type="text" class="categoria" id=categoria' + iCnt + ' '  + 'readonly value='+categoria+'><br><br><\/p>');
+		$(container).append('<p>Descripcion:<input type="text" class="descripcion" id=descripcion' + iCnt + ' '  + 'readonly value='+descripcion+'><br><br><\/p>');
+		$(container).append('');
+		$(container).append('<p>Precio:<input type="text" class="precio" id=precio' + iCnt + ' '  + 'readonly value='+precio+'><br><br><\/p>');
+		$(container).append('<p>Estado:<input type="text" class="estado" id=estado' + iCnt + ' '  + 'readonly value='+estado+'><br><br><\/p>');
+		$(container).append('<button class="btn btn-danger eliminarProducto" onclick="eliminarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Dar de baja el producto<\/button>');
+		$('#tabla2').before(container);
+		$("#tabla2").toggle();
+		
+		
+	});
+	});
+	
+	
+	
+		
+		
 	
 	function eliminar(){
 	confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
@@ -282,6 +307,9 @@
 					<p class='etiqueta'>Si desea añadir un nuevo producto pinche <button class="anadir btn btn-default" id="anadir">aquí.</button></p>
 					
 					
+						
+					
+					
 					<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
 					<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
 					<div class='fav' id='fav2'> 
@@ -298,7 +326,7 @@
 					<button class='cont btn btn-success' id='con3' onclick="confirmarProd(fav3,edit3,con3);">Confirmar</button>
 					<div class='fav' id='fav3'>
 						<h4 class='tituloFav'>Bicicleta de carretera</h4>
-						<p>Categoria&:nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
+						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
 						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
 						<img src="images/bici.jpg" class="img-circle imagenesProductos" alt="Bicicleta">
 						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio2" readonly="readonly"><br><br></p>
@@ -318,8 +346,7 @@
 						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav4,edit4,con4)">Dar de baja el producto</button>
 					</div><br><br>
 					
-					<form id="formulario" action="" method="POST">
-						<table id="tabla2"> 
+					<table id="tabla2"> 
 							<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
 							<tr id="fila2"> 
 							<td><br>
@@ -332,8 +359,8 @@
 								<label><button class='validar btn btn-info' id='validar'>Añadir</button></label><br>
 							</td>   
 							</tr> 
-						</table>
-					</form>
+					</table>
+					
 					</div>
 				</td>
 				</tr>
@@ -345,4 +372,4 @@
     </div>
   </body>
 </html>
-	    
+	    	    

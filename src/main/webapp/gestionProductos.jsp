@@ -37,6 +37,7 @@
       		// Ponemos los resultados en un table de html
       		out.println("<table id=\"tablaGestion\" class=\"table\" ><tr class=\"fila1\"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td></tr>");
       		while (rs.next()) {
+      			out.println("<form action=\"modificarProductos\" method=\"post\">");
         		out.println("<tr>");
          		out.println("<td>"+rs.getObject("titulo")+"</td>");
          		out.println("<td>"+rs.getObject("categoria")+"</td>");
@@ -44,8 +45,9 @@
          		out.println("<td>"+rs.getObject("precio")+"</td>");
          		out.println("<td>"+rs.getObject("estado")+"</td>");
          		out.println("<td>"+"<button class=\"btn btn-warning\">Modificar</button>"+"</td>");
-         		out.println("<td>"+"<button onclick=\"borrarFila\" class=\"btn btn-danger\">Borrar</button>"+"</td>");
+         		out.println("<td>"+"<button onclick=\"borrarFila(this)\" class=\"btn btn-danger\">Borrar</button>"+"</td>");
          		out.println("</tr>");
+         		out.println("</form>");
      		}
      		out.println("</table>");
      		// cierre de la conexion

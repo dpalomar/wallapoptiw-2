@@ -1,6 +1,10 @@
 @import
 	url("http://fonts.googleapis.com/css?family=Philosopher")
 	;
+	
+@import
+	url("http://fonts.googleapis.com/css?family=Ubuntu")
+	;
 
 #container{
 	max-width: 1200px;
@@ -76,4 +80,36 @@ input, select{
 
 #filtrado li{
 	padding: 10px;
+}
+
+.fav{ /*Div de los productos*/
+	margin-left: 210px;
+	margin-right: 180px;
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-family: 'Ubuntu', sans-serif;
+	padding:6px;
+	/*	border: 2px dashed navy;*/
+	background-color: #A9D0F5; 
+}
+	
+.tituloFav{
+	margin-left: -10px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bolder;
+	font-size:20px;
+	color: #0B0B61;
+	padding: 8px;
+}
+
+.imagenesProductos{
+	float: right;
+	width:150px;
+	height:150px;
+	margin-top: -175px;
+}
+
+.fav p{
+	font-size: 15px;
+	font-style: bold;
 }

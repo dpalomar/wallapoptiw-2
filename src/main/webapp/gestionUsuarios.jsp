@@ -17,13 +17,14 @@
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-    
-    function borrarFila(){
-    	Statement st = conexion.createStatement();
-		ResultSet rs = st.executeQuery("DELETE FROM USUARIOS WHERE ID=" );
+		
+    function borrarFila(r){
+    	var i = r.parentNode.parentNode.rowIndex;
+    	document.getElementById("tablaGestion").deleteRow(i);
+    	
     }
-    
     </script>
+    
   </head>
 
   <body>
@@ -46,17 +47,29 @@
 
       		// Ponemos los resultados en un table de html
       		out.println("<table id=\"tablaGestion\" class=\"table\" ><tr class=\"fila1\"><td>Nombre</td><td>Apellido</td><td>Contraseña</td><td>Correo</td><td>Provincia</td></tr>");
+      		
       		while (rs.next()) {
+      			
+      			
+      			out.println("<form action=\"modificarUsuarios\" method=\"post\">");
         		out.println("<tr>");
-         		out.println("<td>"+rs.getObject("nombre")+"</td>");
-         		out.println("<td>"+rs.getObject("apellidos")+"</td>");
-         		out.println("<td>"+rs.getObject("contrasena")+"</td>");
-         		out.println("<td>"+rs.getObject("correo")+"</td>");
-         		out.println("<td>"+rs.getObject("provincia")+"</td>");
-         		out.println("<td>"+"<button class=\"btn btn-warning\">Modificar</button>"+"</td>");
-         		out.println("<td>"+"<button onclick=\"borrarFila\" class=\"btn btn-danger\">Borrar</button>"+"</td>");
+        		
+         		out.println("<td>"+rs.getString("nombre")+"</td>");
+         		out.println("<td>"+rs.getString("apellidos")+"</td>");
+         		out.println("<td>"+rs.getString("contrasena")+"</td>");
+         		out.println("<td>"+rs.getString("correo")+"</td>");
+         		out.println("<td>"+rs.getString("provincia")+"</td>");
+         		
+         		String CorreoClien = rs.getString("correo");
+         		out.println("<input type=\"hidden\" name=\"CorreoClien\" value=\"CorreoClien\" >");
+         	    
+         		out.println("<td>"+"<button name=\"button\" value=\"button1\" class=\"btn btn-warning\">Modificar</button>"+"</td>");
+         		out.println("<td>"+"<button onclick=\"borrarFila(this)\" type=\"submit\" name=\"button\" class=\"btn btn-danger\">Borrar</a>"+"</td>");
+         		
          		out.println("</tr>");
+         		out.println("</form>");
      		}
+      		
      		out.println("</table>");
      		// cierre de la conexion
      		conexion.close();

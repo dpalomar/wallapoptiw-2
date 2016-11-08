@@ -117,6 +117,62 @@
 	</tr>
 	</table><br><br>
 	
+					<div class='fav' id='fav1'> 
+						<h4 class='tituloFav'>Cajonera Blanca IKEA</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Mobiliario</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Mueble blanco de IKEA con cinco cajones.</span><br><br></p>
+						<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">45</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Vendido</span></p>
+					</div> 
+		
+					<div class='fav' id='fav2'>
+						<h4 class='tituloFav'>Bicicleta de carretera</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Vehiculos</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Bicicleta de carretera Elektra Race.</span><br><br></p>
+						<img src="images/bici.jpg" class="img-circle imagenesProductos" alt="Bicicleta">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">340</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Disponible</span><br><br></p>
+					</div> 
+					
+					<div class='fav' id='fav3'> 
+						<h4 class='tituloFav'>Sofa de esquina</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Mobiliario</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Sofa blanco de esquina con almacenaje.</span><br><br></p>
+						<img src="images/sofa.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">190</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Disponible</span><br><br></p>						
+					</div>
+					
+					<div class='fav' id='fav4'> 
+						<h4 class='tituloFav'>Iphone 4s</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Electrónica</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Iphone 4s con cargador y auriculares incluidos.</span><br><br></p>
+						<img src="images/iphone.jpg" class="img-circle imagenesProductos" alt="iphone">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">120</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Disponible</span><br><br></p>						
+					</div>
+					
+					<div class='fav' id='fav5'> 
+						<h4 class='tituloFav'>Bolso Miau</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Moda y belleza</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Bolso de piel de serpiente valorado en 750 euros.</span><br><br></p>
+						<img src="images/bolso.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">180</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Vendido</span><br><br></p>						
+					</div>
+					
+					<div class='fav' id='fav6'> 
+						<h4 class='tituloFav'>Cachimba</h4>
+						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Otros</span><br><br></p>
+						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Cachimba de 50cm traida de Marruecos.</span><br><br></p>
+						<img src="images/cachimba.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
+						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">65</span><br><br></p>
+						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Disponible</span><br><br></p>						
+					</div>
+					
+					<br><br>
+	
 		<div class="footer">
 			<p>&copy; 2016 Wallapop, Inc.</p>
 		</div>
@@ -124,3 +180,4 @@
     </div> 
   </body>
 </html>
+    

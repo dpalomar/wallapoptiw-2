@@ -189,27 +189,6 @@ input{
 	margin-top: -175px;
 }
 
-.error{
-	background-color: #BC1010;
-	padding: 6px 12px;
-	border-radius: 4px;
-	color: white;
-	font-weight: bold;
-	margin-left: 16px;
-	position: absolute;
-}
-/*Sirve para darle forma al cuadro de error, incluyendo la flechita*/
-.error:before{
-	content: '';
-	border-top: 8px solid transparent;
-	border-bottom: 8px solid transparent;
-	border-right: 8px solid #BC1010;
-	border-left: 8px solid transparent;
-	left: -16px;
-	position: absolute;
-	top: 5px;
-}
-
 .borrar{
 	margin-left: 240px;
 	margin-bottom: 30px;

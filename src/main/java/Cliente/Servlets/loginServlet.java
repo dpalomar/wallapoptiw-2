@@ -32,7 +32,7 @@ import Cliente.Dominios.productoDominio;*/
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private clienteDAO dao;
-	
+	private clienteDominio cliente;
 	private Connection con;
     @PersistenceContext(unitName="wallapoptiw")
     EntityManager em;
@@ -61,7 +61,7 @@ public class loginServlet extends HttpServlet {
     	
     	 		
     	 
-    	 clienteDominio u1 = new clienteDominio();
+    	 /*clienteDominio u1 = new clienteDominio();
     	 clienteDominio u2 = new clienteDominio();
     	 clienteDominio u3 = new clienteDominio();
     	 clienteDominio u4 = new clienteDominio();
@@ -89,15 +89,15 @@ public class loginServlet extends HttpServlet {
     	 u4.setApellidos("Martinez");
     	 u4.setCorreo("mmartinez@hotmail.es");
     	 u4.setContrasena("1234");
-    	 u4.setProvincia("32");
+    	 u4.setProvincia("32");*/
     	 	
     	 try {
     	 	ut.begin();
     	 	
-    	 	em.persist(u1);
+    	 	/*em.persist(u1);
     	 	em.persist(u2);
     	 	em.persist(u3);
-    	 	em.persist(u4);
+    	 	em.persist(u4);*/
     	 	
     	 	ut.commit();
     	 
@@ -131,22 +131,36 @@ public class loginServlet extends HttpServlet {
 		String contrasena = request.getParameter("exampleInputPassword1");
 		
 	
-		if(validarLogin(correo, contrasena) == true)
-		{			
-			RequestDispatcher rd = request.getRequestDispatcher("inicioCliente.jsp");
-			rd.forward(request, response);
-		}
-		else
-		{
-			request.setAttribute("loginCorrecto", "false");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
+		try {
+			if(validarLogin(correo, contrasena) == true && correo == "carolina@hotmail.com"){
+				RequestDispatcher rd = request.getRequestDispatcher("inicioAdmin.jsp");
+				rd.forward(request, response);
+			}
+			else if(validarLogin(correo, contrasena) == true && correo != "carolina@hotmail.com")
+			{			
+				RequestDispatcher rd = request.getRequestDispatcher("inicioCliente.jsp");
+				rd.forward(request, response);
+			}
+			else
+			{
+				request.setAttribute("loginCorrecto", "false");
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				rd.forward(request, response);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
-	private boolean validarLogin(String correo, String contrasena) 
+	private boolean validarLogin(String correo, String contrasena) throws SQLException 
 	{
-		boolean res = true;
+		boolean res = false;
+		cliente = dao.recuperarUnClientePorCorreo(correo);
+		if(cliente != null && cliente.getContrasena() == contrasena){
+			res = true;
+		}
+		
 		
 		return res;
 	}
