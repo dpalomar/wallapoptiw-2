@@ -127,6 +127,9 @@ public class clienteDominio implements Serializable {
 	public void setEsAdmin(boolean esAdmin) {
 		this.esAdmin = esAdmin;
 	}
-	
+
+	public Set<productoDominio> getProductos() {
+		return productos;
+	}
 	
 }

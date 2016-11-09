@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
+<%@ page import = "Cliente.Dominios.clienteDominio"%>
+<%
+    clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
+%>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -280,7 +284,7 @@
 					<h3 class='subtitulo'>Datos personales</h3>
 						
 					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly"><br><br></p>
+						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="<%= usuario.getNombre() %>" /><br><br></p>
 						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly"><br><br></p>
 						<p class='etiquetas'><b>Ciudad de residencia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly"><br></p>
 					</div>

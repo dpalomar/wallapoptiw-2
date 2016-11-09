@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -24,15 +26,22 @@ import javax.transaction.UserTransaction;
 
 import Cliente.DAOS.clienteDAO;
 import Cliente.DAOS.clienteDAOImp;
+import Cliente.DAOS.productoDAO;
+import Cliente.DAOS.productoDAOImp;
 import Cliente.Dominios.clienteDominio;
+import Cliente.Dominios.productoDominio;
 
 /**
  * Servlet implementation class modificarUsuarios
  */
-@WebServlet("/gestionUsuarios")
+@WebServlet("/adminusuario")
 public class modificarUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String ACCION = "accion", TRUE = "TRUE",
+			EDITAR ="editar", BORRAR ="borrar";
+	
 	private clienteDAO dao;
+	private productoDAO daoProducto;
 	private Connection con;
     @PersistenceContext(unitName="wallapoptiw")
     EntityManager em;
@@ -52,6 +61,10 @@ public class modificarUsuarios extends HttpServlet {
 		dao = new clienteDAOImp();
 		dao.setConexion(em);
 		dao.setTransaction(ut);
+		
+		daoProducto = new productoDAOImp();
+		daoProducto.setConexion(em);
+		daoProducto.setTransaction(ut);
 	}
     
     public void destroy() {
@@ -66,10 +79,23 @@ public class modificarUsuarios extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String accion = request.getParameter(ACCION);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("gestionUusuarios.jsp");
-		rd.forward(request, response);
-		
+		if(accion != null) {
+			try {
+				if (accion.equalsIgnoreCase(EDITAR)) {
+					this.editarGet(request, response);
+				}else if (accion.equalsIgnoreCase(BORRAR)) {
+					this.borrar(request, response);
+				} else {
+					this.listar(request, response);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		} else {
+			this.listar(request, response);	
+		}
 	  }
 	
 
@@ -77,29 +103,88 @@ public class modificarUsuarios extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();  
-		response.setContentType("text/html");  
-		out.println("<script type=\"text/javascript\">");  
-		out.println("alert('LLAMANDO AL SERVLET');");  
-		out.println("</script>");
-		
-		String correoC = request.getParameter("CorreoClien");
-		clienteDominio clienteBorrar;
-		
-		try {
-			clienteBorrar = dao.recuperarUnClientePorCorreo(correoC);
-			dao.borrarCliente(clienteBorrar);
-		} catch (SQLException | SecurityException | IllegalStateException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException | NotSupportedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		clienteDominio usuario = this.getUsuario(request);
+		if(this.validUsuario(usuario)) {
+			try {
+				dao.actualizarCliente(usuario);
+			} catch (SecurityException | IllegalStateException | SQLException | RollbackException
+					| HeuristicMixedException | HeuristicRollbackException | SystemException
+					| NotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		
-	    
-	    RequestDispatcher rd = request.getRequestDispatcher("gestionUsuarios.jsp");
-		rd.forward(request, response);
+	    this.listar(request, response);
 	    
 	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 
+		Collection<clienteDominio> list = new ArrayList<clienteDominio>();
+		try {
+			list = dao.listarClientes();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("listaUsuarios", list);
+		RequestDispatcher rd = request.getRequestDispatcher("gestionUsuarios.jsp");
+		rd.forward(request, response);
+	}
+
+	private void borrar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+
+		String idTexto = request.getParameter("id");
+		if(idTexto != null) {
+			clienteDominio clienteBorrar;// = new clienteDominio();
+			//clienteBorrar.setId(Long.parseLong(idTexto));
+			
+			try {
+				clienteBorrar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
+				for(productoDominio pro : clienteBorrar.getProductos()){
+					daoProducto.borrarProducto(pro);
+				}
+				dao.borrarCliente(clienteBorrar);
+			} catch (SQLException | SecurityException | IllegalStateException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException | NotSupportedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	    this.listar(request, response);
+	}
+
+	private void editarGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+		clienteDominio clienteEditar = new clienteDominio();
+		String idTexto = request.getParameter("id");
+		if(idTexto != null) {
+			try {
+				clienteEditar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		request.setAttribute("usuario", clienteEditar);
+		RequestDispatcher rd = request.getRequestDispatcher("editarUsuarios.jsp");
+		rd.forward(request, response);
+	}
+
+	private boolean validUsuario(clienteDominio usuario) {
+		return true;
+	}
+	private clienteDominio getUsuario(HttpServletRequest request) {
+		clienteDominio usuario = new clienteDominio();
+		usuario.setId(Long.parseLong(request.getParameter("id")));
+		usuario.setCorreo(request.getParameter("email"));
+		
+		usuario.setNombre(request.getParameter("nomusu"));
+		usuario.setApellidos(request.getParameter("apellidos"));
+		usuario.setContrasena(request.getParameter("contra1"));
+		usuario.setProvincia(request.getParameter("prov"));
+		
+		return usuario;
+	}
 }

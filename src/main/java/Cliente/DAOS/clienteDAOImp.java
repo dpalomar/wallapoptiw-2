@@ -56,6 +56,7 @@ public class clienteDAOImp implements clienteDAO {
 	public void borrarCliente(clienteDominio cliente) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
 		ut.begin();
 		em.remove(em.merge(cliente));
+		em.flush();
 		ut.commit();
 	}
 	@Override

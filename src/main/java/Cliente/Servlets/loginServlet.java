@@ -174,24 +174,16 @@ public class loginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String correo = request.getParameter("exampleInputEmail1");
 		String contrasena = request.getParameter("exampleInputPassword1");
-		clienteDominio usuario = new clienteDominio();
-		usuario.setId(101);
-		usuario.setNombre("Carol");
-		usuario.setCorreo(correo);
+		clienteDominio usuario;
 	
 		try {
-			if(validarLogin(correo, contrasena) == true && correo == "carolina@hotmail.com"){
-				usuario.setEsAdmin(true);
-				request.getSession().setAttribute("usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher("inicioAdmin.jsp");
-				rd.forward(request, response);
+			if(validarLogin(correo, contrasena)){
+				usuario = dao.recuperarUnClientePorCorreo(correo);
 				
-			}
-			else if(validarLogin(correo, contrasena) == true && correo != "carolina@hotmail.com")
-			{			
-				usuario.setEsAdmin(false);
+				String pagina = usuario.isAdmin() ? "inicioAdmin.jsp" : "inicioCliente.jsp";
+				
 				request.getSession().setAttribute("usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher("inicioCliente.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher(pagina);
 				rd.forward(request, response);
 			}
 			else
