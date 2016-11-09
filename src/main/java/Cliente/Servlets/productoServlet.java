@@ -23,6 +23,7 @@ import javax.transaction.UserTransaction;
 
 import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
+import Cliente.Dominios.clienteDominio;
 import Cliente.Dominios.productoDominio;
 
 /**
@@ -34,14 +35,15 @@ public class productoServlet extends HttpServlet {
 	//private ServletConfig config;
 	private productoDAO daoProducto;
 	private Connection con;
-	private static final String SECCION = "SECCION", ACCION = "ACCION", TRUE = "TRUE",
+	private static final String SECCION = "SECCION", ACCION = "accion", TRUE = "TRUE",
 			ALTA_SATISFACTORIA = "ALTA_SATISFACTORIA", 
-			ALTA_PRODUCTO="ALTA_PRODUCTO",EDITAR_PRODUCTO="EDITAR_PRODUCTO",
+			ALTA_PRODUCTO="alta",EDITAR_PRODUCTO="EDITAR_PRODUCTO",
 			BORRAR_PRODUCTO="BORRAR_PRODUCTO",LISTAR_PRODUCTO="LISTAR_PRODUCTO";
 	@PersistenceContext(unitName="wallapoptiw")
 	EntityManager em;
 	@Resource
 	UserTransaction ut;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -157,7 +159,20 @@ public class productoServlet extends HttpServlet {
 
 
 	private productoDominio getProductoAlta(HttpServletRequest request) {
-		return null;
+		productoDominio producto = new productoDominio();
+		String precioTexto = request.getParameter("precio");
+		
+		producto.setTitulo(request.getParameter("titulo"));
+		producto.setCategoria(request.getParameter("categoria"));
+		producto.setDescripcion(request.getParameter("descripcion"));
+		producto.setPrecio(Integer.parseInt(precioTexto));
+		producto.setEstado(request.getParameter("estado"));
+		
+		clienteDominio cliente = new clienteDominio();
+		cliente.setId(101);
+		producto.setDuenoProducto(cliente);
+		
+		return producto;
 	}
 
 	private boolean IsValid(productoDominio produc) {
