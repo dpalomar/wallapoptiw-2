@@ -33,14 +33,14 @@ if(request.getAttribute("loginCorrecto") != null &&
       </div>
 
 		<div class="jumbotron">
-		<form action ="loginServlet" method ="post">
+		<form id="formLogin" action ="login" method ="post">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Nombre de usuario</label>
-			<input type="text" class="form-control" id="exampleInputEmail1">
+			<input type="text" class="form-control" id="exampleInputEmail1" name="exampleInputEmail1" />
 		</div>
 		<div class="form-group">
 			<label for="exampleInputPassword1">Contraseña</label>
-			<input type="password" class="form-control" id="exampleInputPassword1">
+			<input type="password" class="form-control" id="exampleInputPassword1" name="exampleInputPassword1" />
 		</div>
 		<% if(errorInicio) { %>
 		<div>
@@ -48,7 +48,9 @@ if(request.getAttribute("loginCorrecto") != null &&
 		</div>
 		<% } %>
 		<button type="submit" class="btn btn-info">Enviar</button>
-		<button type="button" class="btn btn-success">Regístrate</button>
+		<a href="registro">
+			<button type="button" class="btn btn-success" >Regístrate</button>
+		</a>
 		</form>
 		</div>
 

@@ -29,6 +29,7 @@ import Cliente.Dominios.productoDominio;
 /**
  * Servlet implementation class productoServlet
  */
+
 @WebServlet("/productos")
 public class productoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -56,48 +57,9 @@ public class productoServlet extends HttpServlet {
     
     public void init(ServletConfig config) throws ServletException {
   		//this.config = config;
-  		
   		daoProducto = new productoDAOImp();
   		daoProducto.setConexion(em);
   		daoProducto.setTransaction(ut);
-  		
-  		productoDominio p1 = new productoDominio();
-  		productoDominio p2 = new productoDominio();
-   	 	productoDominio p3 = new productoDominio();
-   	 
-   	 	p1.setTitulo("Cajonera Blanca IKEA");
-   	 	p1.setCategoria("Mobiliario");
-   	 	p1.setDescripcion("Mueble blanco de IKEA con cinco cajones");
-   	 	p1.setPrecio(45);
-   	 	p1.setEstado("Vendido");
-   	 
-   	 	p2.setTitulo("Bicicleta de carretera");
-   	 	p2.setCategoria("Vehiculos");
-   	 	p2.setDescripcion("Bicicleta de carretera Elektra Race");
-   	 	p2.setPrecio(340);
-   	 	p2.setEstado("Disponible");
-   	 
-   	 	p3.setTitulo("Sofa de esquina");
-   	 	p3.setCategoria("Mobiliario");
-   	 	p3.setDescripcion("Sofa blanco de esquina con almacenaje");
-   	 	p3.setPrecio(190);
-   	 	p3.setEstado("Disponible");
-   	 	
-   	 try {
- 	 	ut.begin();
- 	 	
- 	 	em.persist(p1);
- 	 	em.persist(p2);
- 	 	em.persist(p3);
- 	 	
- 	 	ut.commit();
- 	 
- 	 } catch (Exception e1) {
- 	 // TODO Auto-generated catch block
- 	 e1.printStackTrace();
- 	 }
- 	 		
- 	 
  	 }
   	
     
@@ -161,6 +123,7 @@ public class productoServlet extends HttpServlet {
 	private productoDominio getProductoAlta(HttpServletRequest request) {
 		productoDominio producto = new productoDominio();
 		String precioTexto = request.getParameter("precio");
+		clienteDominio usuario = (clienteDominio)request.getSession().getAttribute("usuario");
 		
 		producto.setTitulo(request.getParameter("titulo"));
 		producto.setCategoria(request.getParameter("categoria"));
@@ -169,7 +132,7 @@ public class productoServlet extends HttpServlet {
 		producto.setEstado(request.getParameter("estado"));
 		
 		clienteDominio cliente = new clienteDominio();
-		cliente.setId(101);
+		cliente.setId(usuario.getId());
 		producto.setDuenoProducto(cliente);
 		
 		return producto;

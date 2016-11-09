@@ -18,7 +18,10 @@ import javax.transaction.UserTransaction;
 
 import Cliente.DAOS.clienteDAO;
 import Cliente.DAOS.clienteDAOImp;
+import Cliente.DAOS.productoDAO;
+import Cliente.DAOS.productoDAOImp;
 import Cliente.Dominios.clienteDominio;
+import Cliente.Dominios.productoDominio;
 
 /*import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
@@ -28,9 +31,10 @@ import Cliente.Dominios.productoDominio;*/
 /**
  * Servlet implementation class loginServlet
  */
-@WebServlet("/loginServlet")
+@WebServlet("/login")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private productoDAO daoProducto;
 	private clienteDAO dao;
 	private clienteDominio cliente;
 	private Connection con;
@@ -54,59 +58,100 @@ public class loginServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	 //this.config = config;
     	 		
-    	 dao = new clienteDAOImp();
-    	 dao.setConexion(em);
-    	 dao.setTransaction(ut);
+   		daoProducto = new productoDAOImp();
+   		daoProducto.setConexion(em);
+   		daoProducto.setTransaction(ut);
+
+   		dao = new clienteDAOImp();
+   		dao.setConexion(em);
+   		dao.setTransaction(ut);
+    	 	 
+ 	   	 clienteDominio u1 = new clienteDominio();
+ 	   	 clienteDominio u2 = new clienteDominio();
+ 	   	 clienteDominio u3 = new clienteDominio();
+ 	   	 clienteDominio u4 = new clienteDominio();
+ 	   	 
+ 	   	 u1.setId(100);
+ 	   	 u1.setNombre("Manuel");
+ 	   	 u1.setApellidos("Estada");
+ 	   	 u1.setCorreo("100291136@gmail.com");
+ 	   	 u1.setContrasena("1234");
+ 	   	 u1.setProvincia("1");
+ 	   	 u1.setEsAdmin(true);
+
+ 	   	 u2.setId(101);
+ 	   	 u2.setNombre("Carolina");
+ 	   	 u2.setApellidos("Arredondo");
+ 	   	 u2.setCorreo("carolina@hotmail.com");
+ 	   	 u2.setContrasena("1234");
+ 	   	 u2.setProvincia("7");
+ 	   	 u2.setEsAdmin(true);
+
+ 	   	 u3.setId(102);
+ 	   	 u3.setNombre("David");
+ 	   	 u3.setApellidos("Palomar");
+ 	   	 u3.setCorreo("dpalomar@msn.es");
+ 	   	 u3.setContrasena("1234");
+ 	   	 u3.setProvincia("23");
+ 	   	 u3.setEsAdmin(false);
+ 	   	 		
+ 	   	 u4.setNombre("Maria");
+ 	   	 u4.setApellidos("Martinez");
+ 	   	 u4.setCorreo("mmartinez@hotmail.es");
+ 	   	 u4.setContrasena("1234");
+ 	   	 u4.setProvincia("32");
+ 	   	 u4.setEsAdmin(false);
     	 	
-    	
-    	 		
+   		productoDominio p1 = new productoDominio();
+   		productoDominio p2 = new productoDominio();
+    	 	productoDominio p3 = new productoDominio();
     	 
-    	 /*clienteDominio u1 = new clienteDominio();
-    	 clienteDominio u2 = new clienteDominio();
-    	 clienteDominio u3 = new clienteDominio();
-    	 clienteDominio u4 = new clienteDominio();
+    	 	p1.setTitulo("Cajonera Blanca IKEA");
+    	 	p1.setCategoria("Mobiliario");
+    	 	p1.setDescripcion("Mueble blanco de IKEA con cinco cajones");
+    	 	p1.setPrecio(45);
+    	 	p1.setEstado("Vendido");
+    	 	p1.setDuenoProducto(u1);
     	 
-    	 	
-    	 u1.setNombre("Manuel");
-    	 u1.setApellidos("Estada");
-    	 u1.setCorreo("100291136@gmail.com");
-    	 u1.setContrasena("1234");
-    	 u1.setProvincia("1");
+    	 	p2.setTitulo("Bicicleta de carretera");
+    	 	p2.setCategoria("Vehiculos");
+    	 	p2.setDescripcion("Bicicleta de carretera Elektra Race");
+    	 	p2.setPrecio(340);
+    	 	p2.setEstado("Disponible");
+    	 	p2.setDuenoProducto(u2);
     	 
-    	 u2.setNombre("Carolina");
-    	 u2.setApellidos("Arredondo");
-    	 u2.setCorreo("carolina@hotmail.com");
-    	 u2.setContrasena("1234");
-    	 u2.setProvincia("7");
-    	 		
-    	 u3.setNombre("David");
-    	 u3.setApellidos("Palomar");
-    	 u3.setCorreo("dpalomar@msn.es");
-    	 u3.setContrasena("1234");
-    	 u3.setProvincia("23");
-    	 		
-    	 u4.setNombre("Maria");
-    	 u4.setApellidos("Martinez");
-    	 u4.setCorreo("mmartinez@hotmail.es");
-    	 u4.setContrasena("1234");
-    	 u4.setProvincia("32");*/
-    	 	
-    	 try {
-    	 	ut.begin();
-    	 	
-    	 	/*em.persist(u1);
-    	 	em.persist(u2);
-    	 	em.persist(u3);
-    	 	em.persist(u4);*/
-    	 	
-    	 	ut.commit();
-    	 
-    	 } catch (Exception e1) {
-    	 // TODO Auto-generated catch block
-    	 e1.printStackTrace();
-    	 }
-    	 		
-    	 
+    	 	p3.setTitulo("Sofa de esquina");
+    	 	p3.setCategoria("Mobiliario");
+    	 	p3.setDescripcion("Sofa blanco de esquina con almacenaje");
+    	 	p3.setPrecio(190);
+    	 	p3.setEstado("Disponible");
+    	 	p3.setDuenoProducto(u3);
+	    	 	
+	    	 try {
+	    		 
+		  	 	ut.begin();
+		
+		  	 	
+		 	 	em.persist(u1);
+		 	 	em.persist(u2);
+		 	 	em.persist(u3);
+		 	 	em.persist(u4);
+		 	 
+		 	 	
+		  	 	em.persist(p1);
+		  	 	em.persist(p2);
+		  	 	em.persist(p3);
+		
+		  	 	
+		 		em.flush();
+		 		
+		  	 	ut.commit();
+		  	 	
+			  	 
+		  	 } catch (Exception e1) {
+		  	 // TODO Auto-generated catch block
+		  		 e1.printStackTrace();
+		  	 }    	 
     	 }
     public void destroy() {
 		try {
@@ -119,7 +164,7 @@ public class loginServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.sendRedirect("login.jsp");
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 	/**
@@ -129,15 +174,23 @@ public class loginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String correo = request.getParameter("exampleInputEmail1");
 		String contrasena = request.getParameter("exampleInputPassword1");
-		
+		clienteDominio usuario = new clienteDominio();
+		usuario.setId(101);
+		usuario.setNombre("Carol");
+		usuario.setCorreo(correo);
 	
 		try {
 			if(validarLogin(correo, contrasena) == true && correo == "carolina@hotmail.com"){
+				usuario.setEsAdmin(true);
+				request.getSession().setAttribute("usuario", usuario);
 				RequestDispatcher rd = request.getRequestDispatcher("inicioAdmin.jsp");
 				rd.forward(request, response);
+				
 			}
 			else if(validarLogin(correo, contrasena) == true && correo != "carolina@hotmail.com")
 			{			
+				usuario.setEsAdmin(false);
+				request.getSession().setAttribute("usuario", usuario);
 				RequestDispatcher rd = request.getRequestDispatcher("inicioCliente.jsp");
 				rd.forward(request, response);
 			}
@@ -157,7 +210,7 @@ public class loginServlet extends HttpServlet {
 	{
 		boolean res = false;
 		cliente = dao.recuperarUnClientePorCorreo(correo);
-		if(cliente != null && cliente.getContrasena() == contrasena){
+		if(cliente != null && contrasena.equals(cliente.getContrasena())){
 			res = true;
 		}
 		

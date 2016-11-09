@@ -51,6 +51,8 @@ public class clienteDominio implements Serializable {
 	private String correo;
 	@Column(nullable = false, length = 40)
 	private String provincia;
+	@Column(nullable = false)
+	private boolean esAdmin;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="duenoProducto")
     private Set<productoDominio> productos; 
@@ -59,13 +61,14 @@ public class clienteDominio implements Serializable {
 		super();
 	}
 	
-	public clienteDominio(String nombre, String apellidos, String contrasena, String correo, String provincia) {
+	public clienteDominio(String nombre, String apellidos, String contrasena, String correo, String provincia, boolean esAdmin) {
 		super();
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.contrasena = contrasena;
 		this.correo = correo;
 		this.provincia = provincia;
+		this.esAdmin = esAdmin;
 	}
 
 
@@ -117,4 +120,13 @@ public class clienteDominio implements Serializable {
 		this.provincia = provincia;
 	}
 
+	public boolean isAdmin() {
+		return esAdmin;
+	}
+
+	public void setEsAdmin(boolean esAdmin) {
+		this.esAdmin = esAdmin;
+	}
+	
+	
 }
