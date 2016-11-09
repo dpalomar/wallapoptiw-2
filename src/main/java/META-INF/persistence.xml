@@ -5,6 +5,7 @@
 		<jta-data-source>jdbc/tiw</jta-data-source>
 		<class>Cliente.Dominios.clienteDominio</class>
 		<class>Cliente.Dominios.productoDominio</class>
+		<class>Cliente.Dominios.Mensaje</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 		<properties>

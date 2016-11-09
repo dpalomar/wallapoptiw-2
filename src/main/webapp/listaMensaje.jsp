@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -20,16 +21,28 @@
 		<p>Encuentra tu producto ideal</p>
       </div>
 	
-	<form action="mensajes" method="post">
-	<fieldset>
-		<legend>CHAT de la aplicación WALLAPOP</legend>
-		<textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
-		<br/>
-		<input class="btn btn-info enviar" type="submit" value="enviar" />
-		<input type="hidden" name="to" value="${param.idTo }" />
-		<input type="hidden"  name="from" value="${param.idFrom }"/>
-	</fieldset>
-	</form>
+	<h1>Lista de mensajes</h1>
+	<table>
+		<thead>
+
+			<tr>
+				<th>De</th>
+				<th>Mensaje</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<c:forEach items="${listaMensajes}" var="mensaje">
+				<tr>
+					<td>${mensaje.from.nombre }</td>
+					<td>${mensaje.mensaje }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	<p>
+		<a href="javascript:history.go(-1)">Volver</a>
+	</p>
 	
 	 <div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>

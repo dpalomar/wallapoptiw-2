@@ -1,6 +1,8 @@
 package Cliente.Servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -12,17 +14,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
 import Cliente.DAOS.MensajesDAO;
 import Cliente.DAOS.MensajesDAOImpl;
 import Cliente.DAOS.clienteDAO;
 import Cliente.DAOS.clienteDAOImp;
+import Cliente.Dominios.Mensaje;
+import Cliente.Dominios.clienteDominio;
 import Cliente.util.EscribeEnCola;
 
 /**
  * Servlet implementation class MensajesServlet
  */
+
 @WebServlet("/mensajes")
 public class MensajesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,6 +38,7 @@ public class MensajesServlet extends HttpServlet {
 	private UserTransaction ut;
 	private clienteDAO dao;
 	private MensajesDAO msgDao;
+
 	@Inject
 	private EscribeEnCola colaMensajes;
     /**
@@ -49,23 +56,41 @@ public class MensajesServlet extends HttpServlet {
 		dao = new clienteDAOImp();
 		dao.setConexion(em);
    	 	dao.setTransaction(ut);
-		msgDao = new MensajesDAOImpl(em, ut);
+   	 	msgDao = new MensajesDAOImpl(em, ut);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession sesion = request.getSession();
+		clienteDominio u = (clienteDominio) sesion.getAttribute("usuario");
+		List<Mensaje> mensajes = msgDao.findAllMessagesByUsuario(u);
+		request.setAttribute("listaMensajes", mensajes);
+		this.getServletContext().getRequestDispatcher("/listaMensajes.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Mensaje msgDao = null;
+		try {
+			String mensaje = request.getParameter("mensaje");
+			clienteDominio from = dao.recuperarUnClientePorClave(Integer.valueOf(request.getParameter("from")));
+			clienteDominio to = dao.recuperarUnClientePorClave(Integer.valueOf(request.getParameter("to")));
+			msgDao = new Mensaje(mensaje,from, to);
+			
+		} catch (NumberFormatException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		colaMensajes.enviar(msgDao);
+		
+		this.getServletConfig().getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
 }

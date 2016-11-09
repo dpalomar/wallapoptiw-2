@@ -1,0 +1,18 @@
+@import
+	url("http://fonts.googleapis.com/css?family=Philosopher")
+	;
+
+legend{
+	text-align: center;
+	font-family: 'Philosopher', sans-serif;
+	font-weight: bold;	
+	color: #0B0B3B;
+}
+
+textarea{
+	margin-left: 230px;
+}
+
+.enviar{
+	margin-left: 320px;
+}

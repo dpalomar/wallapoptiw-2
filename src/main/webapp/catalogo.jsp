@@ -148,7 +148,7 @@
 						<h4 class='tituloFav'>Iphone 4s</h4>
 						<p><b>Categoria:</b>&nbsp;&nbsp;&nbsp;<span class="categoria">Electrónica</span><br><br></p>
 						<p><b>Descripcion:</b>&nbsp;&nbsp;&nbsp;<span class="descripcion">Iphone 4s con cargador y auriculares incluidos.</span><br><br></p>
-						<img src="images/iphone.jpg" class="img-circle imagenesProductos" alt="iphone">
+						<img src="images/iphone.JPG" class="img-circle imagenesProductos" alt="iphone">
 						<p><b>Precio:</b>&nbsp;&nbsp;&nbsp;<span class="precio">120</span><br><br></p>
 						<p><b>Estado:</b>&nbsp;&nbsp;&nbsp;<span class="estado">Disponible</span><br><br></p>						
 					</div>
