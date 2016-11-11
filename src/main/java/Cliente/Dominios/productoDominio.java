@@ -60,11 +60,14 @@ public class productoDominio implements Serializable {
 	@Column(nullable = false, length = 300)
 	private String descripcion;
 	@Column(nullable = false)
-	private int precio;
+	private String precio;
 	@Column(nullable = false, length = 30)
 	private String estado;
+	@Lob
+	@Column (nullable = false)
+	private byte[] imagen;
 
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name="clienteId", nullable=false)
 	private clienteDominio duenoProducto;
 	
@@ -73,7 +76,7 @@ public class productoDominio implements Serializable {
 		super();
 	}
 
-	public productoDominio(String titulo, String categoria, String descripcion, int precio, String estado, clienteDominio duenoProducto) {
+	public productoDominio(String titulo, String categoria, String descripcion, String precio, String estado, clienteDominio duenoProducto) {
 		super();
 		this.titulo = titulo;
 		this.categoria = categoria;
@@ -115,11 +118,11 @@ public class productoDominio implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public int getPrecio() {
+	public String getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(String precio) {
 		this.precio = precio;
 	}
 
@@ -138,6 +141,15 @@ public class productoDominio implements Serializable {
 	public void setDuenoProducto(clienteDominio duenoProducto) {
 		this.duenoProducto = duenoProducto;
 	}
+	
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
 	
 		
 }

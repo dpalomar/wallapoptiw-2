@@ -36,6 +36,7 @@ public class productoDAOImp implements productoDAO{
 			HeuristicRollbackException, SystemException, NotSupportedException {
 		ut.begin();
 		em.remove(em.merge(producto));
+		em.flush();
 		ut.commit();
 	}
 

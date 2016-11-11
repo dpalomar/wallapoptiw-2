@@ -6,22 +6,12 @@
 	font-family: 'Philosopher', sans-serif;
 }
 
-.table{
+.fila1{
 	
 	font-weight: bold;	
 	color: #353C63;
 	font-size:18px;
 }
 
-div.table 
-{
-    display:table;
-}
-form.tr
-{
-    display:table-row;
-}
-span.td
-{
-    display:table-cell;
-}
+
+

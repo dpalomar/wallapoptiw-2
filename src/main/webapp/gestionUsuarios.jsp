@@ -15,7 +15,7 @@
     <link rel="icon" href="images/icono.ico">
     <title>WALLAPOP: Gestión de usuarios</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/gestionUsuarios.css" rel="stylesheet">
+    <link href="css/gestion.css" rel="stylesheet">
 	<link href="css/login.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -42,10 +42,10 @@
 	  		 <td><%= cli.getCorreo() %></td>
 	  		 <td><%= cli.getProvincia() %></td>
 	  		 <td>
-	  		 	<a href="admin/usuario?accion=editar&id=<%= cli.getId() %>">
+	  		 	<a href="adminusuario?accion=editar&id=<%= cli.getId() %>">
 	  		 		<button name="button" class="btn btn-warning">Modificar</button></a></td>
 	  		 <td>
-	  		 	<a href="admin/usuario?accion=borrar&id=<%= cli.getId() %>">
+	  		 	<a href="adminusuario?accion=borrar&id=<%= cli.getId() %>">
 	  		 		<button name="button" class="btn btn-warning">Borrar</button></a></td>
 	  		</tr>
 	  

@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "Cliente.Dominios.clienteDominio"%>
+<%@ page import = "java.util.Set"%>
+<%@ page import = "Cliente.Dominios.productoDominio"%>
 <%
     clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
+	Set<productoDominio> listaProductos = usuario.getProductos();
 %>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -169,20 +172,7 @@
 	$("#anadir").click(function(){
 		$("#tabla2").toggle();
 	});
-		document.getElementById('categoria1').value="Mobiliario";
-		document.getElementById('descripcion1').value="Mueble blanco de IKEA con cinco cajones.";
-		document.getElementById('precio1').value="45 euros";
-		document.getElementById('estado1').value="Vendido";
 		
-		document.getElementById('categoria2').value="Vehiculos";
-		document.getElementById('descripcion2').value="Bicicleta de carretera Elektra Race.";
-		document.getElementById('precio2').value="340 euros";
-		document.getElementById('estado2').value="Disponible";
-		
-		document.getElementById('categoria3').value="Mobiliario";
-		document.getElementById('descripcion3').value="Sofa blanco de esquina con almacenaje.";
-		document.getElementById('precio3').value="190 euros";
-		document.getElementById('estado3').value="Disponible";
 	
 	});
 		
@@ -285,8 +275,8 @@
 						
 					<div id='datospersonales'>
 						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="<%= usuario.getNombre() %>" /><br><br></p>
-						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly"><br><br></p>
-						<p class='etiquetas'><b>Ciudad de residencia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly"><br></p>
+						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly" value="<%= usuario.getApellidos() %>"><br><br></p>
+						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly" value="<%= usuario.getProvincia() %>"><br></p>
 					</div>
 					
 					<div class='separacion'>
@@ -296,8 +286,8 @@
 					<h3 class='subtitulo'>Datos de usuario</h3>
 						
 					<div id='datosusuario'>
-						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly"><br><br></p>
-						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly"><br><br></p>
+						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="<%= usuario.getCorreo() %>"><br><br></p>
+						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" value="<%= usuario.getContrasena() %>"><br><br></p>
 					</div>
 					<button class='btn btn-danger borrar' onclick="eliminar()">Darse de baja en la aplicación</button>
 				</div>
@@ -313,42 +303,25 @@
 					
 						
 					
+					<% for(productoDominio product : listaProductos){ %>
 					
-					<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
-					<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
-					<div class='fav' id='fav2'> 
-						<h4 class='tituloFav'>Cajonera Blanca IKEA</h4>
-						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly><br><br></p>
-						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly><br><br></p>
-						<img src="images/cajones.jpg" class="img-circle imagenesProductos" alt="Cajones blancos">
-						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio1" readonly><br><br></p>
-						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado1" readonly><br><br></p>
+						<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
+						<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
+						<div class='fav' id='fav2'> 
+						<h4 class='tituloFav'><%= product.getTitulo() %></h4>
+						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly value="<%= product.getCategoria() %>"><br><br></p>
+						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly value="<%= product.getDescripcion() %>"><br><br></p>
+						
+						<img src="" class="img-circle imagenesProductos" alt="Cajones blancos">
+						
+						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio1" readonly value="<%= product.getPrecio() %>"><br><br></p>
+						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado1" readonly value="<%= product.getEstado() %>"><br><br></p>
 						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav2,edit2,con2)">Dar de baja el producto</button>
 					</div> 
 					
-					<button class='elim btn btn-warning' id='edit3' onclick='editarProd(fav3,edit3,con3)'>Editar</button>
-					<button class='cont btn btn-success' id='con3' onclick="confirmarProd(fav3,edit3,con3);">Confirmar</button>
-					<div class='fav' id='fav3'>
-						<h4 class='tituloFav'>Bicicleta de carretera</h4>
-						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria2" readonly="readonly"><br><br></p>
-						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion2" readonly="readonly"><br><br></p>
-						<img src="images/bici.jpg" class="img-circle imagenesProductos" alt="Bicicleta">
-						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio2" readonly="readonly"><br><br></p>
-						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado2" readonly="readonly"><br><br></p>
-						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav3,edit3,con3)">Dar de baja el producto</button>
-					</div> 
 					
-					<button class='elim btn btn-warning' id='edit4' onclick='editarProd(fav4,edit4,con4)'>Editar</button>
-					<button class='cont btn btn-success' id='con4' onclick="confirmarProd(fav4,edit4, con4);">Confirmar</button>
-					<div class='fav' id='fav4'> 
-						<h4 class='tituloFav'>Sofa de esquina</h4>
-						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria3" readonly="readonly"><br><br></p>
-						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion3" readonly="readonly"><br><br></p>
-						<img src="images/sofa.jpg" class="img-circle imagenesProductos" alt="Sofa de esquina">
-						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio3" readonly="readonly"><br><br></p>
-						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado3" readonly="readonly"><br><br></p>						
-						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav4,edit4,con4)">Dar de baja el producto</button>
-					</div><br><br>
+					 <% } %>
+					<br><br>
 					<form id="formAlta" action="productos?accion=alta" method="post" >
 						<table id="tabla2"> 
 								<tr id="fila1"><td id="celda1"><b>Añade un nuevo producto</b></td></tr> 
@@ -357,7 +330,16 @@
 									<label>Titulo&nbsp;&nbsp;&nbsp;
 										<input type="text" name="titulo" class="tituloProducto"><br><br></label>
 									<label>Categori­a&nbsp;&nbsp;&nbsp;
-										<input type="text" name="categoria" class="categoria" id="categoria4"><br><br></label>
+										<select class="categoria" name="categoria">
+											<option value="cualquiera" selected>Cualquier categoria</option>
+											<option value="Mobiliario">Mobiliario</option>
+											<option value="Vehiculos">Vehículos</option>
+											<option value="Moda y belleza">Moda y belleza</option>
+											<option value="Electronica">Electrónica</option>
+											<option value="Ocio">Ocio y deportes</option>
+											<option value="Otros">Otros</option>
+										</select>
+									<br><br></label>
 									<label>Descripcion&nbsp;&nbsp;&nbsp;
 										<input type="text" name="descripcion" class="descripcion" id="descripcion4"><br><br></label>
 									<label>Imagen&nbsp;&nbsp;&nbsp;

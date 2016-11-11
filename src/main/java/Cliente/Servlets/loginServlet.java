@@ -1,8 +1,13 @@
 package Cliente.Servlets;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -77,7 +82,7 @@ public class loginServlet extends HttpServlet {
  	   	 u1.setCorreo("100291136@gmail.com");
  	   	 u1.setContrasena("1234");
  	   	 u1.setProvincia("1");
- 	   	 u1.setEsAdmin(true);
+ 	   	 u1.setEsAdmin(false);
 
  	   	 u2.setId(101);
  	   	 u2.setNombre("Carolina");
@@ -94,7 +99,8 @@ public class loginServlet extends HttpServlet {
  	   	 u3.setContrasena("1234");
  	   	 u3.setProvincia("23");
  	   	 u3.setEsAdmin(false);
- 	   	 		
+ 	   	 	
+ 	   	 u4.setId(103);
  	   	 u4.setNombre("Maria");
  	   	 u4.setApellidos("Martinez");
  	   	 u4.setCorreo("mmartinez@hotmail.es");
@@ -102,30 +108,66 @@ public class loginServlet extends HttpServlet {
  	   	 u4.setProvincia("32");
  	   	 u4.setEsAdmin(false);
     	 	
-   		productoDominio p1 = new productoDominio();
-   		productoDominio p2 = new productoDominio();
+ 	   	 	productoDominio p1 = new productoDominio();
+ 	   	 	productoDominio p2 = new productoDominio();
     	 	productoDominio p3 = new productoDominio();
+    	 	productoDominio p4 = new productoDominio();
+    	 	productoDominio p5 = new productoDominio();
+    	 	productoDominio p6 = new productoDominio();
     	 
     	 	p1.setTitulo("Cajonera Blanca IKEA");
     	 	p1.setCategoria("Mobiliario");
     	 	p1.setDescripcion("Mueble blanco de IKEA con cinco cajones");
-    	 	p1.setPrecio(45);
+    	 	p1.setPrecio("45");
     	 	p1.setEstado("Vendido");
     	 	p1.setDuenoProducto(u1);
+    	 	try {
+				File imagen1 = new File("/home/tiw/wallapoptiw/src/main/webapp/images/cajones.jpg");
+				InputStream im1 = new FileInputStream(imagen1);
+				byte [] buffer = new byte [(int) imagen1.length()];
+				int readers = im1.read(buffer);
+				p1.setImagen(buffer);
+    	 	} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	 	
+    	 	
     	 
     	 	p2.setTitulo("Bicicleta de carretera");
     	 	p2.setCategoria("Vehiculos");
     	 	p2.setDescripcion("Bicicleta de carretera Elektra Race");
-    	 	p2.setPrecio(340);
+    	 	p2.setPrecio("340");
     	 	p2.setEstado("Disponible");
     	 	p2.setDuenoProducto(u2);
     	 
     	 	p3.setTitulo("Sofa de esquina");
     	 	p3.setCategoria("Mobiliario");
     	 	p3.setDescripcion("Sofa blanco de esquina con almacenaje");
-    	 	p3.setPrecio(190);
+    	 	p3.setPrecio("190");
     	 	p3.setEstado("Disponible");
     	 	p3.setDuenoProducto(u3);
+    	 	
+    	 	p4.setTitulo("Iphone 4s");
+    	 	p4.setCategoria("Electrónica");
+    	 	p4.setDescripcion("Iphone 4s con cargador y auriculares incluidos");
+    	 	p4.setPrecio("120");
+    	 	p4.setEstado("Disponible");
+    	 	p4.setDuenoProducto(u1);
+    	 	
+    	 	p5.setTitulo("Bolso Miau");
+    	 	p5.setCategoria("Moda y belleza");
+    	 	p5.setDescripcion("Bolso de piel de serpiente valorado en 750 euros");
+    	 	p5.setPrecio("180");
+    	 	p5.setEstado("Vendido");
+    	 	p5.setDuenoProducto(u2);
+    	 	
+    	 	p6.setTitulo("Cachimba");
+    	 	p6.setCategoria("Otros");
+    	 	p6.setDescripcion("Cachimba de 50cm traida de Marruecos");
+    	 	p6.setPrecio("65");
+    	 	p6.setEstado("Disponible");
+    	 	p6.setDuenoProducto(u3);
 	    	 	
 	    	 try {
 	    		 
@@ -141,6 +183,9 @@ public class loginServlet extends HttpServlet {
 		  	 	em.persist(p1);
 		  	 	em.persist(p2);
 		  	 	em.persist(p3);
+		  	 	em.persist(p4);
+		  	 	em.persist(p5);
+		  	 	em.persist(p6);
 		
 		  	 	
 		 		em.flush();
@@ -181,6 +226,7 @@ public class loginServlet extends HttpServlet {
 				usuario = dao.recuperarUnClientePorCorreo(correo);
 				
 				String pagina = usuario.isAdmin() ? "inicioAdmin.jsp" : "inicioCliente.jsp";
+				
 				
 				request.getSession().setAttribute("usuario", usuario);
 				RequestDispatcher rd = request.getRequestDispatcher(pagina);

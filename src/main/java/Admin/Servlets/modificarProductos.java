@@ -1,7 +1,6 @@
 package Admin.Servlets;
 
 import java.io.IOException;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,43 +23,37 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
-import Cliente.DAOS.clienteDAO;
-import Cliente.DAOS.clienteDAOImp;
+
 import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
-import Cliente.Dominios.clienteDominio;
 import Cliente.Dominios.productoDominio;
 
 /**
- * Servlet implementation class modificarUsuarios
+ * Servlet implementation class modificarProductos
  */
-@WebServlet("/adminusuario")
-public class modificarUsuarios extends HttpServlet {
+@WebServlet("/adminproducto")
+public class modificarProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ACCION = "accion",
 			EDITAR ="editar", BORRAR ="borrar";
 	
-	private clienteDAO dao;
 	private productoDAO daoProducto;
 	private Connection con;
     @PersistenceContext(unitName="wallapoptiw")
     EntityManager em;
     @Resource
     UserTransaction ut;  
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public modificarUsuarios() {
+    public modificarProductos() {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
     public void init(ServletConfig config) throws ServletException {
 		//this.config = config;
-		
-		dao = new clienteDAOImp();
-		dao.setConexion(em);
-		dao.setTransaction(ut);
 		
 		daoProducto = new productoDAOImp();
 		daoProducto.setConexion(em);
@@ -96,17 +89,16 @@ public class modificarUsuarios extends HttpServlet {
 		} else {
 			this.listar(request, response);	
 		}
-	  }
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		clienteDominio usuario = this.getUsuario(request);
-		if(this.validUsuario(usuario)) {
+		productoDominio producto = this.getProducto(request);
+		if(this.validProducto(producto)) {
 			try {
-				dao.actualizarCliente(usuario);
+				daoProducto.actualizarProducto(producto);
 			} catch (SecurityException | IllegalStateException | SQLException | RollbackException
 					| HeuristicMixedException | HeuristicRollbackException | SystemException
 					| NotSupportedException e) {
@@ -115,36 +107,32 @@ public class modificarUsuarios extends HttpServlet {
 			}
 		}
 	    this.listar(request, response);
-	    
 	}
 	
 	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 
-		Collection<clienteDominio> list = new ArrayList<clienteDominio>();
+		Collection<productoDominio> list = new ArrayList<productoDominio>();
 		try {
-			list = dao.listarClientes();
+			list = daoProducto.listarProductos();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		request.setAttribute("listaUsuarios", list);
-		RequestDispatcher rd = request.getRequestDispatcher("gestionUsuarios.jsp");
+		request.setAttribute("listaProductos", list);
+		RequestDispatcher rd = request.getRequestDispatcher("gestionProductos.jsp");
 		rd.forward(request, response);
 	}
-
+	
 	private void borrar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 
 		String idTexto = request.getParameter("id");
 		if(idTexto != null) {
-			clienteDominio clienteBorrar;// = new clienteDominio();
+			productoDominio productoBorrar;// = new clienteDominio();
 			//clienteBorrar.setId(Long.parseLong(idTexto));
 			
 			try {
-				clienteBorrar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
-				for(productoDominio pro : clienteBorrar.getProductos()){
-					daoProducto.borrarProducto(pro);
-				}
-				dao.borrarCliente(clienteBorrar);
+				productoBorrar = daoProducto.recuperarUnProductoPorClave(Long.parseLong(idTexto));
+				daoProducto.borrarProducto(productoBorrar);
 			} catch (SQLException | SecurityException | IllegalStateException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SystemException | NotSupportedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -152,13 +140,13 @@ public class modificarUsuarios extends HttpServlet {
 		}
 	    this.listar(request, response);
 	}
-
+	
 	private void editarGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-		clienteDominio clienteEditar = new clienteDominio();
+		productoDominio productoEditar = new productoDominio();
 		String idTexto = request.getParameter("id");
 		if(idTexto != null) {
 			try {
-				clienteEditar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
+				productoEditar = daoProducto.recuperarUnProductoPorClave(Long.parseLong(idTexto));
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -167,24 +155,26 @@ public class modificarUsuarios extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		request.setAttribute("usuario", clienteEditar);
-		RequestDispatcher rd = request.getRequestDispatcher("editarUsuarios.jsp");
+		request.setAttribute("producto", productoEditar);
+		RequestDispatcher rd = request.getRequestDispatcher("editarProductos.jsp");
 		rd.forward(request, response);
 	}
-
-	private boolean validUsuario(clienteDominio usuario) {
+	
+	private boolean validProducto(productoDominio producto) {
 		return true;
 	}
-	private clienteDominio getUsuario(HttpServletRequest request) {
-		clienteDominio usuario = new clienteDominio();
-		usuario.setId(Long.parseLong(request.getParameter("id")));
-		usuario.setCorreo(request.getParameter("email"));
+	
+	private productoDominio getProducto(HttpServletRequest request) {
+		productoDominio producto = new productoDominio();
+		producto.setId(Long.parseLong(request.getParameter("id")));
+		producto.setTitulo(request.getParameter("titulo"));
 		
-		usuario.setNombre(request.getParameter("nomusu"));
-		usuario.setApellidos(request.getParameter("apellidos"));
-		usuario.setContrasena(request.getParameter("contra1"));
-		usuario.setProvincia(request.getParameter("prov"));
+		producto.setCategoria(request.getParameter("categoria"));
+		producto.setDescripcion(request.getParameter("descripcion"));
+		producto.setPrecio(request.getParameter("precio"));
+		producto.setEstado(request.getParameter("estado"));
 		
-		return usuario;
+		return producto;
 	}
+
 }

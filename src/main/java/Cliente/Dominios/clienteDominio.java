@@ -15,24 +15,8 @@ import javax.persistence.*;
 @Table(name="USUARIOS")
 public class clienteDominio implements Serializable {
 
-	enum provincias {
-		MADRID (1),
-		VALENCIA (2);
+	
 		
-		private final int value;
-		
-		provincias(int value){
-			this.value = value;
-		}
-
-		public static provincias getProvincia(int provinciaIndex) {
-		   for (provincias p : provincias.values()) {
-		       if (p.value == provinciaIndex) return p;
-		   }
-		   throw new IllegalArgumentException("Provincia no encontrada.");
-		}
-		
-	}
 	
 	private static final long serialVersionUID = 1L;
 

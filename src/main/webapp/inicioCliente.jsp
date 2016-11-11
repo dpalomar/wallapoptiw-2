@@ -36,7 +36,7 @@
             <div class="carousel-caption">
               <h1>Encuentra el producto que deseas</h1>
               <p>En Wallapop puedes buscar dentro de una amplia cantidad de categorías. Tenemos todo tipo de productos a vuestra disposición. ¡Encuentra el producto que estabas buscando!</p>
-              <p><a class="btn btn-lg btn-primary" href="catalogo.jsp" role="button">Catálogo de productos</a></p>
+              <p><a class="btn btn-lg btn-primary" href="catalogo" role="button">Catálogo de productos</a></p>
             </div>
           </div>
         </div>

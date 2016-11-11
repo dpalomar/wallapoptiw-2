@@ -122,13 +122,12 @@ public class productoServlet extends HttpServlet {
 
 	private productoDominio getProductoAlta(HttpServletRequest request) {
 		productoDominio producto = new productoDominio();
-		String precioTexto = request.getParameter("precio");
 		clienteDominio usuario = (clienteDominio)request.getSession().getAttribute("usuario");
 		
 		producto.setTitulo(request.getParameter("titulo"));
 		producto.setCategoria(request.getParameter("categoria"));
 		producto.setDescripcion(request.getParameter("descripcion"));
-		producto.setPrecio(Integer.parseInt(precioTexto));
+		producto.setPrecio(request.getParameter("precio"));
 		producto.setEstado(request.getParameter("estado"));
 		
 		clienteDominio cliente = new clienteDominio();

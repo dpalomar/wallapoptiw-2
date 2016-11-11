@@ -30,7 +30,7 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">Gestiona los usuarios. <span class="text-muted">Bajas y modificaciones.</span></h2>
           <p class="lead">Accede al registro de los usuarios de la aplicación. En él se recojen los datos de todos los usuarios y podrás modificar los datos que ellos deseen, así como darlos de baja.</p>
-			<button onclick="window.location='gestionUsuarios.jsp';" id="botones1" class="btn btn-info">Registro de usuarios</button>
+			<button onclick="window.location='adminusuario';" id="botones1" class="btn btn-info">Registro de usuarios</button>
 		</div>
         <div class="col-md-5">
           <img id="imagenes1" class="featurette-image img-responsive center-block" src="images/usuario.png" alt="Usuarios">
@@ -43,7 +43,7 @@
         <div class="col-md-7 col-md-push-5">
           <h2 class="featurette-heading">Gestiona los productos. <span class="text-muted">Modificaciones y bajas del catálogo.</span></h2>
           <p class="lead">Accede al registro de los productos de la aplicación. En él se recojen los datos de todos los productos del catálogo y podrás modificar los datos que los usuarios deseen, así como darlos de baja.</p>
-			<button onclick="window.location='gestionProductos.jsp';" id="botones2" class="btn btn-info">Catálogo de productos</button>
+			<button onclick="window.location='adminproducto';" id="botones2" class="btn btn-info">Catálogo de productos</button>
 		</div>
         <div class="col-md-5 col-md-pull-7">
           <img id="imagenes2" class="featurette-image img-responsive center-block" src="images/productos.jpg" alt="Generic placeholder image">

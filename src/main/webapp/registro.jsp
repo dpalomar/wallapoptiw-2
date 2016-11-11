@@ -117,63 +117,7 @@
 				<fieldset><legend>INFORMACIÓN PERSONAL</legend><br>
 					<p>Nombre de Usuario:<input id="nomusu" class="form-control" type="text" name="nomusu" tabindex="4"><br><br></p>
 					<p>Apellidos:<input id="apellidos" class="form-control" type="text" name="apellidos" tabindex="5"><br><br></p>
-					<p>Ciudad de residencia:
-					<select name="prov" id="prov" class="form-control">
-					<option value="0">Selecciona</option>
-					<option value="1">Álava</option>
-					<option value="2">Albacete</option>
-					<option value="3">Alicante</option>
-					<option value="4">Almería</option>
-					<option value="5">Asturias</option>
-					<option value="6">Ávila</option>
-					<option value="7">Badajoz</option>
-					<option value="8">Barcelona</option>
-					<option value="9">Burgos</option>
-					<option value="10">Cáceres</option>
-					<option value="11">Cádiz</option>
-					<option value="12">Cantabria</option>
-					<option value="13">Castellón</option>
-					<option value="14">Ciudad Real</option>
-					<option value="15">Córdoba</option>
-					<option value="16">La Coruña</option>
-					<option value="17">Cuenca</option>
-					<option value="18">Gerona</option>
-					<option value="19">Granada</option>
-					<option value="20">Guadalajara</option>
-					<option value="21">Guipúzcoa</option>
-					<option value="22">Huelva</option>
-					<option value="23">Huesca</option>
-					<option value="24">Islas Baleares</option>
-					<option value="25">Jaén</option>
-					<option value="26">León</option>
-					<option value="27">Lérida</option>
-					<option value="28">Lugo</option>
-					<option value="29">Madrid</option>
-					<option value="30">Málaga</option>
-					<option value="31">Murcia</option>
-					<option value="32">Navarra</option>
-					<option value="33">Orense</option>
-					<option value="34">Palencia</option>
-					<option value="35">Las Palmas</option>
-					<option value="36">Pontevedra</option>
-					<option value="37">La Rioja</option>
-					<option value="38">Salamanca</option>
-					<option value="39">Santa Cruz de Tenerife</option>
-					<option value="40">Segovia</option>
-					<option value="41">Sevilla</option>
-					<option value="42">Soria</option>
-					<option value="43">Tarragona</option>
-					<option value="44">Teruel</option>
-					<option value="45">Toledo</option>
-					<option value="46">Valencia</option>
-					<option value="47">Valladolid</option>
-					<option value="48">Vizcaya</option>
-					<option value="49">Zamora</option>
-					<option value="50">Zaragoza</option>
-					<option value="51">Ceuta</option>
-					<option value="52">Melilla</option>
-		</select>
-		</p><br><br>
+					<p>Provincia:<input id="prov" class="form-control" type="text" name="prov" tabindex="6"><br><br></p>
 					
 				</fieldset><br><br>
 				<% if(usuarioExistente) { %>

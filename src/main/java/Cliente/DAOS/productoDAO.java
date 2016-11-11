@@ -30,6 +30,6 @@ public interface productoDAO {
 	public abstract void setConexion(EntityManager em);
 
 	public abstract void setTransaction(UserTransaction ut);
-	
+
 	
 }

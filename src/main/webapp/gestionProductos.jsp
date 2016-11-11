@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
- <%@ page import = "java.sql.*"%>
+<%@ page import = "java.util.Collection"%>
+<%@ page import = "Cliente.Dominios.productoDominio"%>
+<%
+	Collection<productoDominio> list = (Collection<productoDominio>) request.getAttribute("listaProductos");
+%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,7 +15,7 @@
     <link rel="icon" href="images/icono.ico">
     <title>WALLAPOP: Gestión de productos</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/gestionProductos.css" rel="stylesheet">
+    <link href="css/gestion.css" rel="stylesheet">
 	<link href="css/login.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -24,47 +28,30 @@
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
       </div>
-	  <%
-			try {
-   			// Cargar el driver para conectarse a la BD e crear la conexion
-   				Class.forName("com.mysql.jdbc.Driver");
-   				Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiw", "root", "admin");
-   			if (!conexion.isClosed()) {
-      		// La consulta
-      			Statement st = conexion.createStatement();
-      			ResultSet rs = st.executeQuery("Select * from PRODUCTOS" );
-
-      		// Ponemos los resultados en un table de html
-      		out.println("<table id=\"tablaGestion\" class=\"table\" ><tr class=\"fila1\"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td></tr>");
-      		while (rs.next()) {
-      			out.println("<form action=\"modificarProductos\" method=\"post\">");
-        		out.println("<tr>");
-         		out.println("<td>"+rs.getObject("titulo")+"</td>");
-         		out.println("<td>"+rs.getObject("categoria")+"</td>");
-         		out.println("<td>"+rs.getObject("descripcion")+"</td>");
-         		out.println("<td>"+rs.getObject("precio")+"</td>");
-         		out.println("<td>"+rs.getObject("estado")+"</td>");
-         		out.println("<td>"+"<button class=\"btn btn-warning\">Modificar</button>"+"</td>");
-         		out.println("<td>"+"<button onclick=\"borrarFila(this)\" class=\"btn btn-danger\">Borrar</button>"+"</td>");
-         		out.println("</tr>");
-         		out.println("</form>");
-     		}
-     		out.println("</table>");
-     		// cierre de la conexion
-     		conexion.close();
-   			}
-   			else
-      		// Error en la conexion
-      		out.println("Error en la conexión");
-			}
-			catch (Exception e) {
-   			// Error en algun momento.
-   			out.println("Excepcion "+e);
-   			e.printStackTrace();
-			}
-			%>
+	  	  <table id="tablaGestion" class="table" >
+	  <thead>
+	  	<tr class="fila1"><td>Titulo</td><td>Categoria</td><td>Descripcion</td><td>Precio</td><td>Estado</td><td></td><td></td></tr>
+	  </thead>
+	  <tbody>
+	  <% for(productoDominio prod : list) { %>
+	  		<tr>
+	  		 <td><%= prod.getTitulo() %></td>
+	  		 <td><%= prod.getCategoria() %></td>
+	  		 <td><%= prod.getDescripcion() %></td>
+	  		 <td><%= prod.getPrecio() %></td>
+	  		 <td><%= prod.getEstado() %></td>
+	  		 <td>
+	  		 	<a href="adminproducto?accion=editar&id=<%= prod.getId() %>">
+	  		 		<button name="button" class="btn btn-warning">Modificar</button></a></td>
+	  		 <td>
+	  		 	<a href="adminproducto?accion=borrar&id=<%= prod.getId() %>">
+	  		 		<button name="button" class="btn btn-warning">Borrar</button></a></td>
+	  		</tr>
 	  
 	  
+	  <% } %>
+	  </tbody>
+	  </table>
 	  
 	<div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>
