@@ -82,7 +82,7 @@ public class loginServlet extends HttpServlet {
  	   	 u1.setCorreo("100291136@gmail.com");
  	   	 u1.setContrasena("1234");
  	   	 u1.setProvincia("1");
- 	   	 u1.setEsAdmin(false);
+ 	   	 u1.setEsAdmin(true);
 
  	   	 u2.setId(101);
  	   	 u2.setNombre("Carolina");
@@ -121,7 +121,7 @@ public class loginServlet extends HttpServlet {
     	 	p1.setPrecio("45");
     	 	p1.setEstado("Vendido");
     	 	p1.setDuenoProducto(u1);
-    	 	try {
+    	 	/*try {
 				File imagen1 = new File("/home/tiw/wallapoptiw/src/main/webapp/images/cajones.jpg");
 				InputStream im1 = new FileInputStream(imagen1);
 				byte [] buffer = new byte [(int) imagen1.length()];
@@ -130,7 +130,7 @@ public class loginServlet extends HttpServlet {
     	 	} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
     	 	
     	 	
     	 

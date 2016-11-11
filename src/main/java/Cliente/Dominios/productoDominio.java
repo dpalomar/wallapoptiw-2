@@ -63,9 +63,9 @@ public class productoDominio implements Serializable {
 	private String precio;
 	@Column(nullable = false, length = 30)
 	private String estado;
-	@Lob
+	/*@Lob
 	@Column (nullable = false)
-	private byte[] imagen;
+	private byte[] imagen;*/
 
 	@ManyToOne
     @JoinColumn(name="clienteId", nullable=false)
@@ -142,13 +142,6 @@ public class productoDominio implements Serializable {
 		this.duenoProducto = duenoProducto;
 	}
 	
-	public byte[] getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
-	}
 
 	
 		

@@ -68,6 +68,7 @@ public class MensajesServlet extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		clienteDominio u = (clienteDominio) sesion.getAttribute("usuario");
 		List<Mensaje> mensajes = msgDao.findAllMessagesByUsuario(u);
+		request.setAttribute("usuario", u);
 		request.setAttribute("listaMensajes", mensajes);
 		this.getServletContext().getRequestDispatcher("/listaMensajes.jsp").forward(request, response);
 	}
@@ -80,7 +81,8 @@ public class MensajesServlet extends HttpServlet {
 		try {
 			String mensaje = request.getParameter("mensaje");
 			clienteDominio from = dao.recuperarUnClientePorClave(Integer.valueOf(request.getParameter("from")));
-			clienteDominio to = dao.recuperarUnClientePorClave(Integer.valueOf(request.getParameter("to")));
+			clienteDominio to = dao.recuperarUnClientePorCorreo(request.getParameter("to"));
+			
 			msgDao = new Mensaje(mensaje,from, to);
 			
 		} catch (NumberFormatException | SQLException e) {
@@ -90,7 +92,7 @@ public class MensajesServlet extends HttpServlet {
 
 		colaMensajes.enviar(msgDao);
 		
-		this.getServletConfig().getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+		this.getServletConfig().getServletContext().getRequestDispatcher("/chat.jsp").forward(request, response);
 	}
 
 }
