@@ -72,17 +72,19 @@
       </a>
     </div>
 	
-	<table id="buscador">
-		<tr><td id="celda1"><b>Búsqueda rápida de productos</b></td></tr> 
-		<tr id="fila2">
-		<td id="celda2">
-		<span>Buscar producto:<input type="text" class="buscarProd"></span>
-		
-		<span><input type="button" value="Buscar" id="buscar" class="buscar btn btn-primary"></span><br><br>
-		</td> 
-		</tr>
-		<tr ><td id="avanzada"><a class="avanzada" href="catalogo.html">+ Búsqueda avanzada</a></td></tr>
-	</table><br><br>
+	<form id="form_buscador" action="catalogo" method="post">
+		<table id="buscador">
+			<tr><td id="celda1"><b>Búsqueda rápida de productos</b></td></tr> 
+			<tr id="fila2">
+			<td id="celda2">
+			<span>Buscar producto:<input type="text" name="texto" class="buscarProd"></span>
+			
+			<span><input type="submit" value="Buscar" id="buscar" class="buscar btn btn-primary"></span><br><br>
+			</td> 
+			</tr>
+			<tr ><td id="avanzada"><a class="avanzada" href="catalogo?avanzada=true">+ Búsqueda avanzada</a></td></tr>
+		</table><br><br>
+	</form>
 	
 	<table class="productos">
 		<tr>
