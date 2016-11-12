@@ -78,7 +78,7 @@ public class productoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute(SECCION, LISTAR_PRODUCTO);
-		RequestDispatcher rd = request.getRequestDispatcher("perfilCliente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("misProductos.jsp");
 		rd.forward(request, response);
 	}
 
@@ -107,7 +107,7 @@ public class productoServlet extends HttpServlet {
 			} 
 		}
 		request.setAttribute(SECCION, LISTAR_PRODUCTO);
-		RequestDispatcher rd = request.getRequestDispatcher("perfilCliente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("misProductos.jsp");
 		rd.forward(request, response);
 	}
 

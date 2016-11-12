@@ -1,116 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = "Cliente.Dominios.clienteDominio"%>
 <%@ page import = "java.util.Set"%>
 <%@ page import = "Cliente.Dominios.productoDominio"%>
+<%@ page import = "Cliente.Dominios.clienteDominio"%>
+
 <%
     clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
 	Set<productoDominio> listaProductos = usuario.getProductos();
+	
 %>
-   
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
+ <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/icono.ico">
-    <title>WALLAPOP: Perfil de usuario</title>
+    <title>WALLAPOP: Mis productos</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/perfilCliente.css" rel="stylesheet">
 	<link href="css/login.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript">
-
-	/*Distintas pantallas que mostraremos con las opciones del menu*/					
-	function cambiaPantalla(menu){
-		var nombre = document.getElementById(menu).id; 
-		var estilo = document.getElementById(menu).style.display;
-		if(estilo=="none"){
-			document.getElementById(menu).style.visibility='hidden';
-		}
-		/*Mostramos todo lo relacionado con la informaciÃ³n personal*/
-		if(menu=="menu1"){
-			document.getElementById("informacionPersonal").style.visibility='visible';
-			document.getElementById("informacionPersonal").style.display='block';
-			document.getElementById("menu1").className = 'active';
-			document.getElementById("menu2").className = 'noactive';
-			document.getElementById("productos").style.display='none';
-		}
-		/*Mostramos todo lo relacionado con productos*/
-		if(menu=="menu2"){
-			document.getElementById("productos").style.visibility='visible';
-			document.getElementById("productos").style.display='block';
-			document.getElementById("menu2").className = 'active';
-			document.getElementById("menu1").className = 'noactive';
-			document.getElementById("informacionPersonal").style.display='none';
-		}		
-		
-	}
-	
-	function editar(fav){
-		$(fav).css({"border":"dashed 2px #DF0101"});
-		$("#edit1").css({"visibility":"hidden"});
-		$("#con1").css({"visibility":"visible"});
-		
-		document.getElementById('name').readOnly=false;
-		document.getElementById('apellido').readOnly=false;
-		document.getElementById('ciudad').readOnly=false;
-		document.getElementById('correo').readOnly=false;
-		document.getElementById('pass').readOnly=false;
-	};
-	
-	function confirmar(fav){
-		if(validacion() == false){
-			return false;
-		}else{
-		$("#edit1").css({"visibility":"visible"});
-		$("#con1").css({"visibility":"hidden"});
-		$(fav).css({"border":"dashed 2px white"});
-		document.getElementById('name').readOnly=true;
-		document.getElementById('apellido').readOnly=true;
-		document.getElementById('ciudad').readOnly=true;
-		document.getElementById('correo').readOnly=true;
-		document.getElementById('pass').readOnly=true;
-		}
-	};
-	
-	function validacion(){
-	var nombre = document.getElementById('name').value;
-	var apellido = document.getElementById('apellido').value;
-	var ciudad = document.getElementById('ciudad').value;
-	var email = document.getElementById('correo').value;
-	var contras1 = document.getElementById('pass').value;
-	var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
-	
-	if (nombre.length == 0){
-		alert("Por favor introduce tu nombre");
-		return false;
-	}
-	if (apellido.length == 0){
-		alert("Por favor introduce tus apellidos");
-		return false;
-	}
-	if (ciudad.length == 0){
-		alert("Por favor introduce tu ciudad de residencia");
-		return false;
-	}
-	if (email.length == 0){
-		alert("Por favor introduce tu dirección de correo electrónico");
-		return false;
-	}
-	if (!expresion.test(email)){
-		alert("Por favor introduce una dirección de correo electrónico válida");
-		return false;
-	}
-	
-	if (contras1.length == 0){
-		alert("Por favor introduce tu contraseña");
-		return false;
-	}
-	}
-	
+    <script type="text/javascript">
 	function editarProd(fav,boton1, boton2){
 		$(fav).css({"border":"dashed 2px #DF0101"});
 		$(boton1).css({"visibility":"hidden"});
@@ -226,26 +138,14 @@
 	});
 	});
 	
-	
-	
-		
-		
-	
-	function eliminar(){
-	confirm("¿Esta seguro que quiere darse de baja en la aplicación? Al hacerlo se le eliminaran automáticamente los productos que tiene puestos en su perfil.");
-	location.href = "login.jsp"
-	}
-	
-	
 	function eliminarProd(nombre1,nombre2,nombre3){
-	confirm("¿Esta seguro que quiere dar de baja el producto?");
-	$(nombre1).remove();
-	$(nombre2).remove();
-	$(nombre3).remove();	
-	}
-	</script>
-	
-  </head>
+		confirm("¿Esta seguro que quiere dar de baja el producto?");
+		$(nombre1).remove();
+		$(nombre2).remove();
+		$(nombre3).remove();	
+		}
+    </script>
+    </head>
 
   <body>
     <div class="container" id="container">
@@ -254,46 +154,16 @@
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
       </div>
-
-	<div> 
+      
+      <div> 
 		<ul id="opcionesmenu" class="nav nav-pills nav-stacked">
-			<li  class="active" id='menu1' onclick="cambiaPantalla('menu1')" ><a href="#">Información Personal</a></li>		
-			<li  class="noactive" id='menu2' onclick="cambiaPantalla('menu2')"><a href="#">Mis productos</a></li>	
+			<li  class="active" id='menu2' ><a href="#">Mis productos</a></li>	
 		</ul>
-	</div>	
-		
-	<table id='tabla'>
+	  </div>	
+	  
+	  <table id='tabla'>
 		<tr>
 			<td>
-				<div id='informacionPersonal'>
-					<h1 class='titulo'>INFORMACIÓN PERSONAL</h1>
-					
-					<button class='elim btn btn-warning' id='edit1' onclick='editar(datospersonales); editar(datosusuario);'>Editar</button>
-					<button class='cont btn btn-success' id='con1' onclick="validacion(); confirmar(datospersonales);confirmar(datosusuario);">Confirmar</button>
-					
-					<h3 class='subtitulo'>Datos personales</h3>
-						
-					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="<%= usuario.getNombre() %>" ><br><br></p>
-						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly" value="<%= usuario.getApellidos() %>"><br><br></p>
-						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly" value="<%= usuario.getProvincia() %>"><br></p>
-					</div>
-					
-					<div class='separacion'>
-					<p>___________________________________________________________________</p>
-					</div>
-					
-					<h3 class='subtitulo'>Datos de usuario</h3>
-						
-					<div id='datosusuario'>
-						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="<%= usuario.getCorreo() %>"><br><br></p>
-						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' readonly="readonly" value="<%= usuario.getContrasena() %>"><br><br></p>
-					</div>
-					<button class='btn btn-danger borrar' onclick="eliminar()">Darse de baja en la aplicación</button>
-				</div>
-					
-			
-	
 				<div class="oculto" id="productos">
 					<h1 class='titulo'>MIS PRODUCTOS</h1>
 					<p class='etiqueta'>A continuacion, se mostraran las productos que tiene puestos en venta. </p>
@@ -359,11 +229,12 @@
 				</td>
 				</tr>
 			</table>
-
-    <div class="footer">
+	  
+	
+	
+ <div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>
     </div>
     </div>
   </body>
 </html>
-	    	    
