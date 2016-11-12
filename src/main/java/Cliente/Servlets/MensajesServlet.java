@@ -70,7 +70,7 @@ public class MensajesServlet extends HttpServlet {
 		List<Mensaje> mensajes = msgDao.findAllMessagesByUsuario(u);
 		request.setAttribute("usuario", u);
 		request.setAttribute("listaMensajes", mensajes);
-		this.getServletContext().getRequestDispatcher("/listaMensajes.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/chat.jsp").forward(request, response);
 	}
 
 	/**

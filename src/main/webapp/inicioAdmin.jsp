@@ -56,7 +56,7 @@
         <div class="col-md-7">
           <h2 class="featurette-heading">Comunicate con otros usuarios. <span class="text-muted">Chatea.</span></h2>
           <p class="lead">En esta sección podrás iniciar un chat con cualquier usuario de la aplicación.</p>
-			<button onclick="window.location='Chat.jsp';" id="botones3" class="btn btn-info">Chat</button>
+			<button onclick="window.location='mensajes';" id="botones3" class="btn btn-info">Chat</button>
 	   </div>
         <div class="col-md-5">
           <img id="imagenes3" class="featurette-image img-responsive center-block" src="images/chat.png" alt="Generic placeholder image">

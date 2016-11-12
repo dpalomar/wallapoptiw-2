@@ -274,7 +274,7 @@
 					<h3 class='subtitulo'>Datos personales</h3>
 						
 					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="<%= usuario.getNombre() %>" /><br><br></p>
+						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' readonly="readonly" value="<%= usuario.getNombre() %>" ><br><br></p>
 						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' readonly="readonly" value="<%= usuario.getApellidos() %>"><br><br></p>
 						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" readonly="readonly" value="<%= usuario.getProvincia() %>"><br></p>
 					</div>
@@ -302,7 +302,7 @@
 					
 					
 						
-					
+				
 					<% for(productoDominio product : listaProductos){ %>
 					
 						<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
@@ -345,9 +345,9 @@
 									<label>Imagen&nbsp;&nbsp;&nbsp;
 										<input id="imagen4" name="imagen" type="file" accept="image/*"><br><br></label>
 									<label>Precio&nbsp;&nbsp;&nbsp;
-										<input type="text" name="precio" class="precio" id="precio4"><br><br></label>
+										<input type="text" name="precio" class="precio" id="precio4" ><br><br></label>
 									<label>Estado&nbsp;&nbsp;&nbsp;
-										<input type="text" name="estado" class="estado" id="estado4"><br><br></label>
+										<input type="text" name="estado" class="estado" id="estado4" value="Disponible" readonly><br><br></label>
 									<label>
 										<button type="submit" class='validar btn btn-info' id='validar'>Añadir</button></label><br>
 								</td>   
