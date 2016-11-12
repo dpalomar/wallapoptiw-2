@@ -229,8 +229,8 @@ public class loginServlet extends HttpServlet {
 				
 				
 				request.getSession().setAttribute("usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher(pagina);
-				rd.forward(request, response);
+				
+				response.sendRedirect(pagina);
 			}
 			else
 			{

@@ -22,6 +22,9 @@ public interface productoDAO {
 	public abstract productoDominio crearProducto(productoDominio nuevoProducto) throws SQLException, SecurityException, IllegalStateException, RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException;
 
 	public abstract Collection<productoDominio> recuperarProductosPorTexto(String texto) throws SQLException;
+	
+	public abstract Collection<productoDominio> recuperarProductosAvanzado(String categoria, String provincia, String vendedor, String titulo, String descripcion) throws SQLException;
+		
 
 	public abstract productoDominio recuperarUnProductoPorClave(long pk) throws SQLException;
 

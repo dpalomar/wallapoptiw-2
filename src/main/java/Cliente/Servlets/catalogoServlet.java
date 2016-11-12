@@ -70,22 +70,57 @@ public class catalogoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(request.getParameter("avanzada") != null){
+			request.setAttribute("avanzada", "ture");
+		}
+		this.mostrarResultados(request, response, list);
+	}
+
+	/**'
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String texto = request.getParameter("texto");
+		Collection<productoDominio> list = null;
+
+		try {
+			if(texto != null) {
+				list = this.buscarTexto(texto);
+			} else {
+				String categoria = request.getParameter("categoria");
+				String provincia = request.getParameter("provincia");
+				String vendedor = request.getParameter("vendedor");
+				String titulo = request.getParameter("titulo");
+				String descripcion = request.getParameter("descripcion");
+				if("vacio".equals(categoria)){
+					categoria = null;
+				}
+				
+				list = this.busquedaAvanzada(categoria, provincia, vendedor, titulo, descripcion);
+				
+				request.setAttribute("avanzada", "true");
+				request.setAttribute("categoria", categoria);
+				request.setAttribute("provincia", provincia);
+				request.setAttribute("vendedor", vendedor);
+				request.setAttribute("titulo", titulo);
+				request.setAttribute("descripcion", descripcion);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.mostrarResultados(request, response, list);
+	}
+
+	private Collection<productoDominio> buscarTexto(String texto) throws SQLException{
+		return daoProducto.recuperarProductosPorTexto(texto);
+	}
+
+	private Collection<productoDominio> busquedaAvanzada(String categoria, String provincia, String vendedor, String titulo, String descripcion) throws SQLException{
+		return daoProducto.recuperarProductosAvanzado(categoria, provincia, vendedor, titulo, descripcion);
+	}
+	private void mostrarResultados(HttpServletRequest request, HttpServletResponse response, Collection<productoDominio> list) throws ServletException, IOException {
 		request.setAttribute("listaProductos", list);
 		RequestDispatcher rd = request.getRequestDispatcher("catalogo.jsp");
 		rd.forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-		//Aqui entiendo yo que irá todo lo del buscador en el catálogo
-		
-		
-		doGet(request, response);
-	}
-
 }

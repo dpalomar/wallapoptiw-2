@@ -69,9 +69,10 @@ input, select{
 
 #busqueda_avanzada{
 	background-color:#91B1DB;
-	display:none;
 }
-
+#buscador_avanzado {
+	display: none;
+}
 #filtrado{
 	margin-top: 20px;
 	margin-bottom: 20px;
