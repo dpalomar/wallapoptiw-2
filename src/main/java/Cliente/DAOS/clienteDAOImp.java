@@ -1,8 +1,11 @@
 package Cliente.DAOS;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -15,18 +18,32 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import Cliente.Dominios.clienteDominio;
+import Cliente.Dominios.productoDominio;
 
 
 public class clienteDAOImp implements clienteDAO {
 	private EntityManager em;
 	private UserTransaction ut;
+	private productoDAO daoProductos;
+	
+	public clienteDAOImp() {
+		daoProductos = new productoDAOImp();
+		daoProductos.setConexion(em);
+		daoProductos.setTransaction(ut);
+	}
 	@Override
 	public Collection<clienteDominio> listarClientes() throws SQLException{
 		return em.createQuery("select c from clienteDominio c", clienteDominio.class).getResultList();
 	}
 	@Override
 	public clienteDominio recuperarUnClientePorClave(long pk) throws SQLException{
-		return em.find(clienteDominio.class, pk);
+		clienteDominio res = em.find(clienteDominio.class, pk);
+		Set<productoDominio> resPro = new HashSet<productoDominio>();
+		for(productoDominio pro : daoProductos.recuperarProductosPorDueno(res)){
+			resPro.add(pro);
+		}
+		res.setProductos(resPro);
+		return res;
 	}
 	@SuppressWarnings("rawtypes")
 	@Override

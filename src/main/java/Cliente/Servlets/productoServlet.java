@@ -39,6 +39,8 @@ public class productoServlet extends HttpServlet {
 	private static final String SECCION = "SECCION", ACCION = "accion", TRUE = "TRUE",
 			ALTA_SATISFACTORIA = "ALTA_SATISFACTORIA", 
 			ALTA_PRODUCTO="alta",EDITAR_PRODUCTO="EDITAR_PRODUCTO",
+			EDICION_SATISFACTORIA="EDICION_SATISFACTORIA",
+			BORRADO_SATISFACTORIO="BORRADO_SATISFACTORIO",
 			BORRAR_PRODUCTO="BORRAR_PRODUCTO",LISTAR_PRODUCTO="LISTAR_PRODUCTO";
 	@PersistenceContext(unitName="wallapoptiw")
 	EntityManager em;
@@ -92,16 +94,12 @@ public class productoServlet extends HttpServlet {
 			try {
 				if (accion.equalsIgnoreCase(ALTA_PRODUCTO)) {
 					this.AltaProducto(request);
-				}/*else if (accion.equalsIgnoreCase(EDITAR)) {
-					Usuario usuario = recuperarDatosUsuario(request);
-					request.setAttribute("usuario", usuario);
-					pagina = "/editarusuario.jsp";
+				}else if (accion.equalsIgnoreCase(EDITAR_PRODUCTO)) {
+					this.EdicionProducto(request);
 				
-				}else if (accion.equalsIgnoreCase(BORRAR)) {
-					Usuario usuario = recuperarDatosUsuario(request);
-					pagina = "/login.jsp";
-					borrarUsuario(usuario);
-				}*/
+				}else if (accion.equalsIgnoreCase(BORRAR_PRODUCTO)) {
+					this.BajaProducto(request);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
@@ -118,7 +116,21 @@ public class productoServlet extends HttpServlet {
 			request.setAttribute(ALTA_SATISFACTORIA, TRUE);
 		} 
 	}
-
+	
+	private void BajaProducto(HttpServletRequest request) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+		productoDominio ProductoBaja = this.getProductoBaja(request);
+			daoProducto.borrarProducto(ProductoBaja);
+			request.setAttribute(BORRADO_SATISFACTORIO, TRUE);
+	}
+	
+	private void EdicionProducto(HttpServletRequest request) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+		productoDominio ProductoModificado = this.getProductoEditado(request);
+		if(this.IsValid(ProductoModificado)){
+			daoProducto.crearProducto(ProductoModificado);
+			request.setAttribute(EDICION_SATISFACTORIA, TRUE);
+		} 
+	}
+	
 
 	private productoDominio getProductoAlta(HttpServletRequest request) {
 		productoDominio producto = new productoDominio();
@@ -135,6 +147,31 @@ public class productoServlet extends HttpServlet {
 		producto.setDuenoProducto(cliente);
 		
 		return producto;
+	}
+	
+	private productoDominio getProductoBaja(HttpServletRequest request) {
+		productoDominio ProductoBaja = this.getProductoBaja(request);
+		ProductoBaja.getTitulo();
+		ProductoBaja.getCategoria();
+		ProductoBaja.getDescripcion();
+		ProductoBaja.getPrecio();
+		ProductoBaja.getEstado();
+		
+		return ProductoBaja;
+		
+	}
+	
+	private productoDominio getProductoEditado(HttpServletRequest request) {
+		productoDominio ProductoModificado = new productoDominio();
+		clienteDominio usuario = (clienteDominio)request.getSession().getAttribute("usuario");
+		
+		ProductoModificado.setTitulo(request.getParameter("titulo"));
+		ProductoModificado.setCategoria(request.getParameter("categoria"));
+		ProductoModificado.setDescripcion(request.getParameter("descripcion"));
+		ProductoModificado.setPrecio(request.getParameter("precio"));
+		ProductoModificado.setEstado(request.getParameter("estado"));
+	
+		return ProductoModificado;
 	}
 
 	private boolean IsValid(productoDominio produc) {

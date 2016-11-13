@@ -116,4 +116,8 @@ public class clienteDominio implements Serializable {
 		return productos;
 	}
 	
+
+	public void setProductos(Set<productoDominio> productos) {
+		this.productos = productos;
+	}
 }

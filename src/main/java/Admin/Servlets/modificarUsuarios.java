@@ -140,7 +140,7 @@ public class modificarUsuarios extends HttpServlet {
 			//clienteBorrar.setId(Long.parseLong(idTexto));
 			
 			try {
-				clienteBorrar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
+				clienteBorrar = dao.recuperarUnClientePorCorreo(idTexto);
 				for(productoDominio pro : clienteBorrar.getProductos()){
 					daoProducto.borrarProducto(pro);
 				}
@@ -180,10 +180,10 @@ public class modificarUsuarios extends HttpServlet {
 		usuario.setId(Long.parseLong(request.getParameter("id")));
 		usuario.setCorreo(request.getParameter("email"));
 		
-		usuario.setNombre(request.getParameter("nomusu"));
+		usuario.setNombre(request.getParameter("nombre"));
 		usuario.setApellidos(request.getParameter("apellidos"));
-		usuario.setContrasena(request.getParameter("contra1"));
-		usuario.setProvincia(request.getParameter("prov"));
+		usuario.setContrasena(request.getParameter("contrasena"));
+		usuario.setProvincia(request.getParameter("ciudad"));
 		
 		return usuario;
 	}

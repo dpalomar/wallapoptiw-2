@@ -26,7 +26,7 @@
 		var ciudad = document.getElementById("ciudad").value;
 		var email = document.getElementById("correo").value;
 		var contras1 = document.getElementById("pass").value;
-		var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+		//var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
 		
 	
 	if (nombre.length == 0){
@@ -46,10 +46,10 @@
 		alert("Por favor introduce una dirección de correo electrónico");
 		return false;
 	}
-	if (!expresion.test(email)){
+	/*if (!expresion.test(email)){
 		alert("Por favor introduce una dirección de correo electrónico válida");
 		return false;
-	}
+	}*/
 	
 	if (contras1.length == 0){
 		alert("Por favor introduce una contraseña");
@@ -76,7 +76,7 @@
 					<h3 class='subtitulo'>Datos personales</h3>
 						
 					<div id='datospersonales'>
-						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombrecompleto" tabindex="1" id='name' value="<%= usuario.getNombre() %>" /><br><br></p>
+						<p class='etiquetas'><b>Nombre:&nbsp;&nbsp;&nbsp;</b><input class="nombrecompleto" type="text" name="nombre" tabindex="1" id='name' value="<%= usuario.getNombre() %>" /><br><br></p>
 						<p class='etiquetas'><b>Apellidos:&nbsp;&nbsp;&nbsp;</b><input class="apellidos" type="text" name="apellidos" tabindex="2" id='apellido' value="<%= usuario.getApellidos() %>"><br><br></p>
 						<p class='etiquetas'><b>Provincia:&nbsp;</b><input type="text" name="ciudad" id="ciudad" tabindex="3" value="<%= usuario.getProvincia() %>"><br></p>
 					</div>
@@ -89,7 +89,7 @@
 						
 					<div id='datosusuario'>
 						<input name="id" type="hidden" readonly="readonly" value="<%= usuario.getId() %>">
-						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="<%= usuario.getCorreo() %>"><br><br></p>
+						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id="correo" name= "email" readonly="readonly" value="<%= usuario.getCorreo() %>"><br><br></p>
 						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' value="<%= usuario.getContrasena() %>"><br><br></p>
 					</div>
 					<input type="submit" onclick="return validacion();" value="Confirmar cambios" id="boton" class="btn btn-info">
