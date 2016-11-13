@@ -23,61 +23,27 @@
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
+    
 	function editarProd(fav,boton1, boton2){
 		$(fav).css({"border":"dashed 2px #DF0101"});
 		$(boton1).css({"visibility":"hidden"});
 		$(boton2).css({"visibility":"visible"});
-		if(boton1 == edit2){
-		document.getElementById('categoria1').readOnly=false;
-		document.getElementById('descripcion1').readOnly=false;
-		document.getElementById('precio1').readOnly=false;
-		document.getElementById('estado1').readOnly=false;
-		}
-		else if(boton1 == edit3){
-		document.getElementById('categoria2').readOnly=false;
-		document.getElementById('descripcion2').readOnly=false;
-		document.getElementById('precio2').readOnly=false;
-		document.getElementById('estado2').readOnly=false;
-		}else if(boton1 == edit4){
-		document.getElementById('categoria3').readOnly=false;
-		document.getElementById('descripcion3').readOnly=false;
-		document.getElementById('precio3').readOnly=false;
-		document.getElementById('estado3').readOnly=false;
-		}else if (boton1 == edit5){
-		document.getElementById('categoria5').readOnly=false;
-		document.getElementById('descripcion5').readOnly=false;
-		document.getElementById('precio5').readOnly=false;
-		document.getElementById('estado5').readOnly=false;
-		}
 		
+		document.getElementById('categoria').readOnly=false;
+		document.getElementById('descripcion').readOnly=false;
+		document.getElementById('precio').readOnly=false;
+		document.getElementById('estado').readOnly=false;	
 	};
 	
 	function confirmarProd(fav,boton1, boton2){
 		$(boton1).css({"visibility":"visible"});
 		$(boton2).css({"visibility":"hidden"});
 		$(fav).css({"border":"solid 2px #A9D0F5"});
-		if(boton1 == edit2){
-		document.getElementById('categoria1').readOnly=true;
-		document.getElementById('descripcion1').readOnly=true;
-		document.getElementById('precio1').readOnly=true;
-		document.getElementById('estado1').readOnly=true;
-		}
-		else if(boton1 == edit3){
-		document.getElementById('categoria2').readOnly=true;
-		document.getElementById('descripcion2').readOnly=true;
-		document.getElementById('precio2').readOnly=true;
-		document.getElementById('estado2').readOnly=true;
-		}else if(boton1 == edit4){
-		document.getElementById('categoria3').readOnly=true;
-		document.getElementById('descripcion3').readOnly=true;
-		document.getElementById('precio3').readOnly=true;
-		document.getElementById('estado3').readOnly=true;
-		}else if(boton1 == edit5){
-		document.getElementById('categoria5').readOnly=true;
-		document.getElementById('descripcion5').readOnly=true;
-		document.getElementById('precio5').readOnly=true;
-		document.getElementById('estado5').readOnly=true;
-		}
+		
+		document.getElementById('categoria').readOnly=true;
+		document.getElementById('descripcion').readOnly=true;
+		document.getElementById('precio').readOnly=true;
+		document.getElementById('estado').readOnly=true;
 	};
 	
 	$(document).ready(function(){
@@ -113,11 +79,16 @@
 			alert("Introduzca un precio para el nuevo producto");
 			return false;
 		}
+		if (!/^([0-9])*$/.test(precio)){
+			alert("El campo precio solo puede contener un numero");
+			return false;
+		}
 		if(estado == ""){
 			alert("Introduzca un estado para el nuevo producto");
 			return false;
 		}
- 
+ 		
+		//Esto sobra cuando funcione la lectura de base de datos
 		iCnt = iCnt + 1;
 		var container = $(document.createElement('div')).attr('class', 'fav').attr('id', 'fav' + iCnt);
 		
@@ -175,18 +146,18 @@
 				
 					<% for(productoDominio product : listaProductos){ %>
 					
-						<button class='elim btn btn-warning' id='edit2' onclick='editarProd(fav2,edit2,con2)'>Editar</button>
-						<button class='cont btn btn-success' id='con2' onclick='confirmarProd(fav2,edit2,con2);'>Confirmar</button>
-						<div class='fav' id='fav2'> 
+						<button class='elim btn btn-warning' id='edit' onclick='editarProd(this.fav,this.edit,this.con)'>Editar</button>
+						<button class='cont btn btn-success' id='con' onclick='confirmarProd(this.fav,this.edit,this.con);'>Confirmar</button>
+						<div class='fav' id='fav'> 
 						<h4 class='tituloFav'><%= product.getTitulo() %></h4>
-						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria1" readonly value="<%= product.getCategoria() %>"><br><br></p>
-						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion1" readonly value="<%= product.getDescripcion() %>"><br><br></p>
+						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria" readonly value="<%= product.getCategoria() %>"><br><br></p>
+						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion" readonly value="<%= product.getDescripcion() %>"><br><br></p>
 						
 						<img src="" class="img-circle imagenesProductos" alt="Cajones blancos">
 						
-						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio1" readonly value="<%= product.getPrecio() %>"><br><br></p>
-						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado1" readonly value="<%= product.getEstado() %>"><br><br></p>
-						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(fav2,edit2,con2)">Dar de baja el producto</button>
+						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio" readonly value="<%= product.getPrecio() %>"><br><br></p>
+						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado" readonly value="<%= product.getEstado() %>"><br><br></p>
+						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(this.fav,this.edit,this.con)">Dar de baja el producto</button>
 					</div> 
 					
 					

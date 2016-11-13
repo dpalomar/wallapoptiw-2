@@ -18,6 +18,48 @@
 	<link href="css/login.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js" ></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    	<script type="text/javascript">
+
+	function validacion(){
+		var nombre = document.getElementById("name").value;
+		var apellido = document.getElementById("apellido").value;
+		var ciudad = document.getElementById("ciudad").value;
+		var email = document.getElementById("correo").value;
+		var contras1 = document.getElementById("pass").value;
+		var expresion = /^[a-z][\w.-]+@\w[\w.-]+\.[\w.-]*[a-z][a-z]$/i;
+		
+	
+	if (nombre.length == 0){
+		alert("Por favor introduce un nombre");
+		return false;
+	}
+	if (apellido.length == 0){
+		alert("Por favor introduce un apellidos");
+		return false;
+	}
+	if (ciudad.length == 0) {
+        alert("Por favor introduce una ciudad de residencia");
+		return false;
+    }
+	
+	if (email.length == 0){
+		alert("Por favor introduce una dirección de correo electrónico");
+		return false;
+	}
+	if (!expresion.test(email)){
+		alert("Por favor introduce una dirección de correo electrónico válida");
+		return false;
+	}
+	
+	if (contras1.length == 0){
+		alert("Por favor introduce una contraseña");
+		return false;
+	}
+	//alert("Registro completado con éxito")
+	return true;
+
+	}
+	</script>
 	</head>
 
   <body>
@@ -40,7 +82,7 @@
 					</div>
 					
 					<div class='separacion'>
-					<p>___________________________________________________________________</p>
+					<p>_________________________________________________________</p>
 					</div>
 					
 					<h3 class='subtitulo'>Datos de usuario</h3>
@@ -50,7 +92,7 @@
 						<p class='etiquetas'><b>E-mail:&nbsp;&nbsp;&nbsp;</b><input type="text" class="email" tabindex="4" id='correo' readonly="readonly" value="<%= usuario.getCorreo() %>"><br><br></p>
 						<p class='etiquetas' ><b>Contraseña:&nbsp;</b><input class="contrasena" name="contrasena" type="text" tabindex="5" id ='pass' value="<%= usuario.getContrasena() %>"><br><br></p>
 					</div>
-					<input type="submit" value="Confirmar cambios" class="btn btn-info">
+					<input type="submit" onclick="return validacion();" value="Confirmar cambios" id="boton" class="btn btn-info">
 		</form>
 	  
 	  <div class="footer">

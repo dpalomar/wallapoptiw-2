@@ -57,7 +57,7 @@
             <div class="carousel-caption">
               <h1>Comunicate con otros usuarios</h1>
               <p>Relacionate con otros usuarios a través del chat.</p>
-              <p><a class="btn btn-lg btn-primary" href="Chat.jsp" role="button">Chat</a></p>
+              <p><a class="btn btn-lg btn-primary" href="mensajes" role="button">Chat</a></p>
             </div>
           </div>
         </div>

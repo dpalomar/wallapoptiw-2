@@ -27,8 +27,8 @@
         <h2 class="text-muted">WALLAPOP</h2>
 		<p>Encuentra tu producto ideal</p>
       </div>
-		<h1>Lista de mensajes</h1>
-	<table>
+		<h3>Lista de mensajes</h3>
+	<table class="tablaLista">
 		<thead>
 
 			<tr>
@@ -52,10 +52,10 @@
 	<form action="mensajes" method="post">
 	<fieldset>
 		<legend>CHAT de la aplicación WALLAPOP</legend>
-		<textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea>
-		<p>Indica el correo del destinatario:</p><input name="to" />
+		<textarea name="mensaje" id="mensaje" cols="30" rows="10"></textarea><br><br>
+		<p class="destino">Indica el correo del destinatario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="to" /></p>
 		<br/>
-		<input class="btn btn-primary enviar" type="submit" value="enviar" />
+		<input class="btn btn-primary enviar" type="submit" value="Enviar" />
 		<input type="hidden"  name="from" value="<%= usuario.getId() %>" />
 	</fieldset>
 	</form>

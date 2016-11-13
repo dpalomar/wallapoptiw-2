@@ -1,10 +1,7 @@
 package Cliente.Servlets;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -79,9 +76,9 @@ public class loginServlet extends HttpServlet {
  	   	 u1.setId(100);
  	   	 u1.setNombre("Manuel");
  	   	 u1.setApellidos("Estada");
- 	   	 u1.setCorreo("100291136@gmail.com");
+ 	   	 u1.setCorreo("manuel@gmail.com");
  	   	 u1.setContrasena("1234");
- 	   	 u1.setProvincia("1");
+ 	   	 u1.setProvincia("Cadiz");
  	   	 u1.setEsAdmin(true);
 
  	   	 u2.setId(101);
@@ -89,7 +86,7 @@ public class loginServlet extends HttpServlet {
  	   	 u2.setApellidos("Arredondo");
  	   	 u2.setCorreo("carolina@hotmail.com");
  	   	 u2.setContrasena("1234");
- 	   	 u2.setProvincia("7");
+ 	   	 u2.setProvincia("Madrid");
  	   	 u2.setEsAdmin(true);
 
  	   	 u3.setId(102);
@@ -97,7 +94,7 @@ public class loginServlet extends HttpServlet {
  	   	 u3.setApellidos("Palomar");
  	   	 u3.setCorreo("dpalomar@msn.es");
  	   	 u3.setContrasena("1234");
- 	   	 u3.setProvincia("23");
+ 	   	 u3.setProvincia("Sevilla");
  	   	 u3.setEsAdmin(false);
  	   	 	
  	   	 u4.setId(103);
@@ -105,7 +102,7 @@ public class loginServlet extends HttpServlet {
  	   	 u4.setApellidos("Martinez");
  	   	 u4.setCorreo("mmartinez@hotmail.es");
  	   	 u4.setContrasena("1234");
- 	   	 u4.setProvincia("32");
+ 	   	 u4.setProvincia("Segovia");
  	   	 u4.setEsAdmin(false);
     	 	
  	   	 	productoDominio p1 = new productoDominio();

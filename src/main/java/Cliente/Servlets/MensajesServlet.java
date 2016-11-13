@@ -92,7 +92,7 @@ public class MensajesServlet extends HttpServlet {
 
 		colaMensajes.enviar(msgDao);
 		
-		this.getServletConfig().getServletContext().getRequestDispatcher("/chat.jsp").forward(request, response);
+		this.getServletConfig().getServletContext().getRequestDispatcher("/mensajes").forward(request, response);
 	}
 
 }
