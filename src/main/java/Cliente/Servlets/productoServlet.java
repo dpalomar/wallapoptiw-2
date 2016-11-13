@@ -3,6 +3,8 @@ package Cliente.Servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -20,7 +22,8 @@ import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
-
+import Cliente.DAOS.clienteDAO;
+import Cliente.DAOS.clienteDAOImp;
 import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
 import Cliente.Dominios.clienteDominio;
@@ -35,6 +38,7 @@ public class productoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//private ServletConfig config;
 	private productoDAO daoProducto;
+	private clienteDAO dao;
 	private Connection con;
 	private static final String SECCION = "SECCION", ACCION = "accion", TRUE = "TRUE",
 			ALTA_SATISFACTORIA = "ALTA_SATISFACTORIA", 
@@ -62,6 +66,10 @@ public class productoServlet extends HttpServlet {
   		daoProducto = new productoDAOImp();
   		daoProducto.setConexion(em);
   		daoProducto.setTransaction(ut);
+  		
+  		dao = new clienteDAOImp();
+  		dao.setConexion(em);
+  		dao.setTransaction(ut);
  	 }
   	
     
@@ -93,27 +101,44 @@ public class productoServlet extends HttpServlet {
 		if(accion != null) {
 			try {
 				if (accion.equalsIgnoreCase(ALTA_PRODUCTO)) {
-					this.AltaProducto(request);
+					this.AltaProducto(request, response);
 				}else if (accion.equalsIgnoreCase(EDITAR_PRODUCTO)) {
 					this.EdicionProducto(request);
 				
 				}else if (accion.equalsIgnoreCase(BORRAR_PRODUCTO)) {
 					this.BajaProducto(request);
+				}else{
+					this.listar(request, response);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
+		}else{
+			this.listar(request, response);
 		}
-		request.setAttribute(SECCION, LISTAR_PRODUCTO);
+	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+
+		Collection<productoDominio> listaProductos = null;
+		clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
+		try {
+			listaProductos = daoProducto.recuperarProductosPorDueno(usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("listaProductos", listaProductos);
 		RequestDispatcher rd = request.getRequestDispatcher("misProductos.jsp");
 		rd.forward(request, response);
 	}
 
-	private void AltaProducto(HttpServletRequest request) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
+	private void AltaProducto(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException, ServletException, IOException {
 		productoDominio nuevoProducto = this.getProductoAlta(request);
 		if(this.IsValid(nuevoProducto)){
 			daoProducto.crearProducto(nuevoProducto);
 			request.setAttribute(ALTA_SATISFACTORIA, TRUE);
+			 this.listar(request, response);
 		} 
 	}
 	

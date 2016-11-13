@@ -47,7 +47,7 @@
               <h1>Visita tu perfil</h1>
               <p>Accede a tu información personal. Podrás modificar tu información de usuario, dar de alta un producto que quieras vender, modificar los datos sobre un producto (así como darlo de baja o modificar su estado) o darte de baja de la aplicación.</p>
               <p><a class="btn btn-lg btn-primary" href="miUsuario" role="button">Mi perfil</a>
-              <a class="btn btn-lg btn-primary" href="misProductos.jsp" role="button">Mis productos</a></p>
+              <a class="btn btn-lg btn-primary" href="productos" role="button">Mis productos</a></p>
             </div>
           </div>
         </div>

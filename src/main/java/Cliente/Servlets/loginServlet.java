@@ -218,6 +218,7 @@ public class loginServlet extends HttpServlet {
 		String contrasena = request.getParameter("exampleInputPassword1");
 		clienteDominio usuario;
 		Collection<productoDominio> listaProductos;
+		
 	
 		try {
 			if(validarLogin(correo, contrasena)){
