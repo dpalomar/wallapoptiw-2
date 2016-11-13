@@ -4,7 +4,7 @@ package Cliente.Servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
+import java.util.Collection;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -217,14 +217,15 @@ public class loginServlet extends HttpServlet {
 		String correo = request.getParameter("exampleInputEmail1");
 		String contrasena = request.getParameter("exampleInputPassword1");
 		clienteDominio usuario;
+		Collection<productoDominio> listaProductos;
 	
 		try {
 			if(validarLogin(correo, contrasena)){
 				usuario = dao.recuperarUnClientePorCorreo(correo);
-				
+				listaProductos = daoProducto.recuperarProductosPorDueno(usuario);
 				String pagina = usuario.isAdmin() ? "inicioAdmin.jsp" : "inicioCliente.jsp";
 				
-				
+				request.getSession().setAttribute("listaProductos", listaProductos);
 				request.getSession().setAttribute("usuario", usuario);
 				
 				response.sendRedirect(pagina);

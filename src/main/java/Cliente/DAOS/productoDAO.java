@@ -11,6 +11,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
+import Cliente.Dominios.clienteDominio;
 import Cliente.Dominios.productoDominio;
 
 public interface productoDAO {
@@ -25,8 +26,9 @@ public interface productoDAO {
 	
 	public abstract Collection<productoDominio> recuperarProductosAvanzado(String categoria, String provincia, String vendedor, String titulo, String descripcion) throws SQLException;
 		
-
 	public abstract productoDominio recuperarUnProductoPorClave(long pk) throws SQLException;
+	
+	public abstract Collection<productoDominio> recuperarProductosPorDueno(clienteDominio cliente) throws SQLException;
 
 	public abstract Collection<productoDominio> listarProductos() throws SQLException;
 

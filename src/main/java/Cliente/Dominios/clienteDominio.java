@@ -38,7 +38,7 @@ public class clienteDominio implements Serializable {
 	@Column(nullable = false)
 	private boolean esAdmin;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="duenoProducto")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="duenoProducto", targetEntity=productoDominio.class)
     private Set<productoDominio> productos; 
     
 	public clienteDominio() {

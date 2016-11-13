@@ -3,11 +3,12 @@
 <%@ page import = "java.util.Set"%>
 <%@ page import = "Cliente.Dominios.productoDominio"%>
 <%@ page import = "Cliente.Dominios.clienteDominio"%>
+<%@ page import = "java.util.Collection"%>
+
 
 <%
     clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
-	Set<productoDominio> listaProductos = usuario.getProductos();
-	
+	Collection<productoDominio> listaProductos = (Collection<productoDominio>) request.getSession().getAttribute("listaProductos");	
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,7 +56,6 @@
 	});
 		
 	$(document).ready(function(){
-	var iCnt = 4;
 	$("#validar").click(function(){
 		var titulo = $(".tituloProducto").val();
 		var categoria = $("#categoria4").val();
@@ -88,23 +88,6 @@
 			return false;
 		}
  		
-		//Esto sobra cuando funcione la lectura de base de datos
-		iCnt = iCnt + 1;
-		var container = $(document.createElement('div')).attr('class', 'fav').attr('id', 'fav' + iCnt);
-		
-		$(container).prepend('<button class="elim btn btn-warning" id=edit'+ iCnt + ' '  + 'onclick="editarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Editar<\/button>');
-		$(container).prepend('<button class="cont btn btn-success" id=con'+ iCnt + ' '  + 'onclick="confirmarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Confirmar<\/button>');
-		
-		$(container).append('<h4 class="tituloFav">'+ titulo + '<\/h4>');
-		$(container).append('<p>Categoria:<input type="text" class="categoria" id=categoria' + iCnt + ' '  + 'readonly value='+categoria+'><br><br><\/p>');
-		$(container).append('<p>Descripcion:<input type="text" class="descripcion" id=descripcion' + iCnt + ' '  + 'readonly value='+descripcion+'><br><br><\/p>');
-		$(container).append('');
-		$(container).append('<p>Precio:<input type="text" class="precio" id=precio' + iCnt + ' '  + 'readonly value='+precio+'><br><br><\/p>');
-		$(container).append('<p>Estado:<input type="text" class="estado" id=estado' + iCnt + ' '  + 'readonly value='+estado+'><br><br><\/p>');
-		$(container).append('<button class="btn btn-danger eliminarProducto" onclick="eliminarProd(fav' + iCnt + ' '+',edit' + iCnt + ' '+',con' + iCnt + ' '+')">Dar de baja el producto<\/button>');
-		$('#tabla2').before(container);
-		$("#tabla2").toggle();
-		
 		
 	});
 	});

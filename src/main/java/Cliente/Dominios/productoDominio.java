@@ -72,8 +72,8 @@ public class productoDominio implements Serializable {
 	@Column (nullable = false)
 	private byte[] imagen;*/
 
-	@ManyToOne
-    @JoinColumn(name="clienteId", nullable=false)
+	@ManyToOne(optional=false)
+	@JoinColumn(name="clienteID", nullable=false)
 	private clienteDominio duenoProducto;
 	
 	

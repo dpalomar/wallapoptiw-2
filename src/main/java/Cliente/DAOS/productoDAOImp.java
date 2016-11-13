@@ -3,8 +3,10 @@ package Cliente.DAOS;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 //import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
@@ -13,6 +15,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
+import Cliente.Dominios.clienteDominio;
 import Cliente.Dominios.productoDominio;
 
 public class productoDAOImp implements productoDAO{
@@ -117,6 +120,12 @@ public class productoDAOImp implements productoDAO{
 	public Collection<productoDominio> listarProductos() throws SQLException {
 		return em.createQuery("select p from productoDominio p", productoDominio.class).getResultList();
 	}
+	
+	@Override
+	public Collection<productoDominio> recuperarProductosPorDueno(clienteDominio cliente) throws SQLException {
+		Query query = em.createQuery("select p from productoDominio p where p.duenoProducto=:dueno", productoDominio.class);
+		return query.setParameter("dueno", cliente).getResultList();
+	}
 
 	@Override
 	public void setConexion(EntityManager em) {
@@ -127,5 +136,6 @@ public class productoDAOImp implements productoDAO{
 	public void setTransaction(UserTransaction ut) {
 		this.ut = ut;
 	}
+
 
 }
