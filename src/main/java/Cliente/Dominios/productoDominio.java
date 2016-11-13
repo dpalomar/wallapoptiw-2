@@ -20,8 +20,13 @@ public class productoDominio implements Serializable {
 	
 
 	enum TipoCategoria {
-		TECNOLOGIA (1, "Tecnología"),
-		ROPA_INFANTIL (2, "Ropa infantil");
+		MOBILIARIO (1, "Mobiliario"),
+		VEHICULOS (2, "Vehiculos"),
+		MODA_Y_BELLEZA (3, "Moda y belleza" ),
+		ELECTRONICA (4, "Electronica"),
+		OCIO_DEPORTES (5,"ocio y deportes"),
+		OTROS (6," otras categorias")
+		;
 		
 		private final int value;
 		private final String descripcion;
