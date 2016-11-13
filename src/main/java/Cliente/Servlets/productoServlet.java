@@ -3,7 +3,6 @@ package Cliente.Servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -133,11 +132,11 @@ public class productoServlet extends HttpServlet {
 	
 
 	private void AltaProducto(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException, ServletException, IOException {
-		productoDominio nuevoProducto = this.getProductoAlta(request);
+		productoDominio nuevoProducto = this.getProducto(request);
 		if(this.IsValid(nuevoProducto)){
 			daoProducto.crearProducto(nuevoProducto);
 			request.setAttribute(ALTA_SATISFACTORIA, TRUE);
-			 this.listar(request, response);
+			 
 		} 
 	}
 	

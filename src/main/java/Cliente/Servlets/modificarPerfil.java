@@ -34,7 +34,8 @@ import Cliente.Dominios.productoDominio;
 @WebServlet("/miUsuario")
 public class modificarPerfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final String ACCION = "accion",
+			EDITAR ="editar", BORRAR ="borrar";
 	private clienteDAO dao;
 	private productoDAO daoProducto;
 	private Connection con;
@@ -83,14 +84,14 @@ public class modificarPerfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String accion = request.getParameter("param");
+		String accion = request.getParameter(ACCION);
 		
 		if(accion != null) {
 			try {
-				if (accion.equalsIgnoreCase("editar")) {
-					editarGet(request, response);
-				}else if (accion.equalsIgnoreCase("borrar")) {
-					borrar(request, response);
+				if (accion.equalsIgnoreCase(EDITAR)) {
+					this.editarGet(request, response);
+				}else if (accion.equalsIgnoreCase(BORRAR)) {
+					this.borrar(request, response);
 				} else {
 					RequestDispatcher rd = request.getRequestDispatcher("miPerfil.jsp");
 					rd.forward(request, response);
@@ -108,7 +109,7 @@ public class modificarPerfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		clienteDominio usuario = getUsuario(request);
+		clienteDominio usuario = this.getUsuario(request);
 		if(validUsuario(usuario)) {
 			try {
 				dao.actualizarCliente(usuario);
