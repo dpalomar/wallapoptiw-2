@@ -25,16 +25,6 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
     
-	function editarProd(fav,boton1, boton2){
-		$(fav).css({"border":"dashed 2px #DF0101"});
-		$(boton1).css({"visibility":"hidden"});
-		$(boton2).css({"visibility":"visible"});
-		
-		document.getElementById('categoria').readOnly=false;
-		document.getElementById('descripcion').readOnly=false;
-		document.getElementById('precio').readOnly=false;
-		document.getElementById('estado').readOnly=false;	
-	};
 	
 	function confirmarProd(fav,boton1, boton2){
 		$(boton1).css({"visibility":"visible"});
@@ -91,12 +81,23 @@
 		
 	});
 	});
+
+	function editarProd(){
+		$("#fav").css({"border":"dashed 2px #DF0101"});
+		$("#edit").css({"visibility":"hidden"});
+		$("#confirm").css({"visibility":"visible"});
+		
+		document.getElementById('categoria').readOnly=false;
+		document.getElementById('descripcion').readOnly=false;
+		document.getElementById('precio').readOnly=false;
+		document.getElementById('estado').readOnly=false;	
+	};
 	
-	function eliminarProd(nombre1,nombre2,nombre3){
-		confirm("¿Esta seguro que quiere dar de baja el producto?");
-		$(nombre1).remove();
-		$(nombre2).remove();
-		$(nombre3).remove();	
+	function eliminarProd(){
+		return confirm("¿Esta seguro que quiere dar de baja el producto?");
+		//$(nombre1).remove();
+		//$(nombre2).remove();
+		//$(nombre3).remove();	
 		}
     </script>
     </head>
@@ -129,19 +130,27 @@
 				
 					<% for(productoDominio product : listaProductos){ %>
 					
-						<button class='elim btn btn-warning' id='edit' onclick='editarProd(this.fav,this.edit,this.con)'>Editar</button>
-						<button class='cont btn btn-success' id='con' onclick='confirmarProd(this.fav,this.edit,this.con);'>Confirmar</button>
-						<div class='fav' id='fav'> 
-						<h4 class='tituloFav'><%= product.getTitulo() %></h4>
-						<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria" readonly value="<%= product.getCategoria() %>"><br><br></p>
-						<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion" readonly value="<%= product.getDescripcion() %>"><br><br></p>
-						
-						<img src="" class="img-circle imagenesProductos" alt="Cajones blancos">
-						
-						<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio" readonly value="<%= product.getPrecio() %>"><br><br></p>
-						<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado" readonly value="<%= product.getEstado() %>"><br><br></p>
-						<button class='btn btn-danger eliminarProducto' onclick="eliminarProd(this.fav,this.edit,this.con)">Dar de baja el producto</button>
-					</div> 
+						<button class='elim btn btn-warning' id='edit' onclick='editarProd()'>Editar</button>
+						<div class="fav" id="fav"> 
+							<form action="productos" method="post">
+								<input type="hidden" name="accion" value="editar" />
+								<input type="hidden" name="titulo" value="<%= product.getTitulo() %>" />
+								<input type="hidden" name="id" value="<%= product.getId() %>" />
+								<button type="submit" class="cont btn btn-success" id="confirm" >Confirmar</button>
+									<h4 class='tituloFav'><%= product.getTitulo() %></h4>
+									<p>Categoria:&nbsp;&nbsp;&nbsp;<input type="text" class="categoria" id="categoria" name="categoria" readonly value="<%= product.getCategoria() %>"><br><br></p>
+									<p>Descripcion:&nbsp;&nbsp;&nbsp;<input type="text" class="descripcion" id="descripcion" name="descripcion" readonly value="<%= product.getDescripcion() %>"><br><br></p>
+								
+									<img src="" class="img-circle imagenesProductos" alt="Cajones blancos">
+								
+									<p>Precio:&nbsp;&nbsp;&nbsp;<input type="text" class="precio" id="precio" name="precio" readonly value="<%= product.getPrecio() %>"><br><br></p>
+									<p>Estado:&nbsp;&nbsp;&nbsp;<input type="text" class="estado" id="estado" name="estado" readonly value="<%= product.getEstado() %>"><br><br></p>
+								
+							</form>
+							<a href="productos?accion=borrar&id=<%= product.getId() %>" >
+								<button class='btn btn-danger eliminarProducto' onclick="eliminarProd()">Dar de baja el producto</button>
+							</a>
+						</div> 
 					
 					
 					 <% } %>

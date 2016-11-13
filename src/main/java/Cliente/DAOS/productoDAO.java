@@ -2,6 +2,7 @@ package Cliente.DAOS;
 
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.transaction.HeuristicMixedException;

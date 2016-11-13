@@ -35,7 +35,7 @@ import Cliente.Dominios.productoDominio;
  * Servlet implementation class modificarUsuarios
  */
 @WebServlet("/adminusuario")
-public class modificarUsuarios extends HttpServlet {
+public class modificarUsuarios extends HttpServlet { 
 	private static final long serialVersionUID = 1L;
 	private static final String ACCION = "accion",
 			EDITAR ="editar", BORRAR ="borrar";
@@ -140,7 +140,7 @@ public class modificarUsuarios extends HttpServlet {
 			//clienteBorrar.setId(Long.parseLong(idTexto));
 			
 			try {
-				clienteBorrar = dao.recuperarUnClientePorCorreo(idTexto);
+				clienteBorrar = dao.recuperarUnClientePorClave(Long.parseLong(idTexto));
 				for(productoDominio pro : clienteBorrar.getProductos()){
 					daoProducto.borrarProducto(pro);
 				}

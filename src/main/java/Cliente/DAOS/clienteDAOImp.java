@@ -31,6 +31,7 @@ public class clienteDAOImp implements clienteDAO {
 		daoProductos.setConexion(em);
 		daoProductos.setTransaction(ut);
 	}
+	
 	@Override
 	public Collection<clienteDominio> listarClientes() throws SQLException{
 		return em.createQuery("select c from clienteDominio c", clienteDominio.class).getResultList();
@@ -38,11 +39,12 @@ public class clienteDAOImp implements clienteDAO {
 	@Override
 	public clienteDominio recuperarUnClientePorClave(long pk) throws SQLException{
 		clienteDominio res = em.find(clienteDominio.class, pk);
-		Set<productoDominio> resPro = new HashSet<productoDominio>();
-		for(productoDominio pro : daoProductos.recuperarProductosPorDueno(res)){
-			resPro.add(pro);
+		Collection<productoDominio> lista = daoProductos.recuperarProductosPorDueno(res);
+		Set<productoDominio> proList = new HashSet<productoDominio>();
+		for(productoDominio pro : lista){
+			proList.add(pro);
 		}
-		res.setProductos(resPro);
+		res.setProductos(proList);
 		return res;
 	}
 	@SuppressWarnings("rawtypes")
@@ -53,7 +55,7 @@ public class clienteDAOImp implements clienteDAO {
 	public clienteDominio recuperarUnClientePorCorreo(String correo) throws SQLException{
 
 		clienteDominio res = null;
-		Query consulta = em.createQuery("select c from clienteDominio c where c.correo=:corr", clienteDominio.class);
+		Query consulta = em.createQuery("select c from clienteDominio c where c.correo=:corr ", clienteDominio.class);
 		consulta.setParameter("corr", correo);
 		List list = consulta.getResultList();
 		if(list != null && list.size() > 0) {

@@ -26,6 +26,7 @@ import javax.transaction.UserTransaction;
 
 import Cliente.DAOS.productoDAO;
 import Cliente.DAOS.productoDAOImp;
+import Cliente.Dominios.clienteDominio;
 import Cliente.Dominios.productoDominio;
 
 /**
@@ -173,6 +174,10 @@ public class modificarProductos extends HttpServlet {
 		producto.setDescripcion(request.getParameter("descripcion"));
 		producto.setPrecio(request.getParameter("precio"));
 		producto.setEstado(request.getParameter("estado"));
+		
+		clienteDominio cliente = new clienteDominio();
+		cliente.setId(Long.parseLong(request.getParameter("clienteid")));
+		producto.setDuenoProducto(cliente);
 		
 		return producto;
 	}

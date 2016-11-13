@@ -72,10 +72,11 @@
 		<p>Encuentra tu producto ideal</p>
       </div>
 	  
-	  <form class="contenido" method="post">
+	  <form class="contenido" action="adminproducto" method="post">
 					<h1 class='titulo'>INFORMACIÓN DEL PRODUCTO</h1>
 					
 					<input name="id" type="hidden" readonly="readonly" value="<%= producto.getId() %>">
+					<input name="clienteid" type="hidden" readonly="readonly" value="<%= producto.getDuenoProducto().getId() %>">
 					<p class='etiquetas'><b>Titulo&nbsp;&nbsp;&nbsp;</b><input type="text" class="tituloProducto" id="titulo" name="titulo" value="<%= producto.getTitulo()%>"><br><br></p>
 					
 					<p class='etiquetas'><b>Categori­a&nbsp;&nbsp;&nbsp;</b><select class="categorias" id="categoria" name="categoria">
@@ -94,9 +95,7 @@
 					<p class='etiquetas'><b>Estado&nbsp;&nbsp;&nbsp;</b><input type="text" class="estado" id="estado" name="estado" value="<%= producto.getEstado()%>"><br><br></p>
 					<input type="submit" onclick="return validacion();" value="Confirmar cambios" id="boton" class="btn btn-info">	
 		</form>
-	  <p>
-		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
-	</p>
+	  
 	  <div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>
     </div>

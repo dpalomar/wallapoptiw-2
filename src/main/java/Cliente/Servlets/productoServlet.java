@@ -87,7 +87,21 @@ public class productoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute(SECCION, LISTAR_PRODUCTO);
+		
+		String accion = request.getParameter(ACCION);
+		
+		if(accion != null) {
+			try {
+				//if (accion.equalsIgnoreCase(EDITAR_PRODUCTO)) {
+				//	this.EdicionProducto(request);
+				//}else 
+				if (accion.equalsIgnoreCase(BORRAR_PRODUCTO)) {
+					this.BajaProducto(request);
+				} 
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		} 
 		RequestDispatcher rd = request.getRequestDispatcher("misProductos.jsp");
 		rd.forward(request, response);
 	}
@@ -107,31 +121,16 @@ public class productoServlet extends HttpServlet {
 				
 				}else if (accion.equalsIgnoreCase(BORRAR_PRODUCTO)) {
 					this.BajaProducto(request);
-				}else{
-					this.listar(request, response);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
-		}else{
-			this.listar(request, response);
 		}
-	}
-	
-	private void listar(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
-
-		Collection<productoDominio> listaProductos = null;
-		clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
-		try {
-			listaProductos = daoProducto.recuperarProductosPorDueno(usuario);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		request.setAttribute("listaProductos", listaProductos);
+		request.setAttribute(SECCION, LISTAR_PRODUCTO);
 		RequestDispatcher rd = request.getRequestDispatcher("misProductos.jsp");
 		rd.forward(request, response);
 	}
+	
 
 	private void AltaProducto(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException, ServletException, IOException {
 		productoDominio nuevoProducto = this.getProductoAlta(request);
@@ -143,21 +142,30 @@ public class productoServlet extends HttpServlet {
 	}
 	
 	private void BajaProducto(HttpServletRequest request) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
-		productoDominio ProductoBaja = this.getProductoBaja(request);
-			daoProducto.borrarProducto(ProductoBaja);
-			request.setAttribute(BORRADO_SATISFACTORIO, TRUE);
+		String idTexto = request.getParameter("id");
+		productoDominio productoBaja = daoProducto.recuperarUnProductoPorClave(Long.parseLong(idTexto));
+		daoProducto.borrarProducto(productoBaja);
+		clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
+		Collection<productoDominio> listaProductos = daoProducto.recuperarProductosPorDueno(usuario);
+		request.getSession().setAttribute("listaProductos", listaProductos);
+		request.setAttribute(BORRADO_SATISFACTORIO, TRUE);
 	}
 	
 	private void EdicionProducto(HttpServletRequest request) throws SecurityException, IllegalStateException, SQLException, javax.transaction.RollbackException, HeuristicMixedException, HeuristicRollbackException, SystemException, NotSupportedException {
-		productoDominio ProductoModificado = this.getProductoEditado(request);
+		productoDominio ProductoModificado = this.getProducto(request);
+		String idTexto = request.getParameter("id");
+		ProductoModificado.setId(Long.parseLong(idTexto));
 		if(this.IsValid(ProductoModificado)){
-			daoProducto.crearProducto(ProductoModificado);
+			daoProducto.actualizarProducto(ProductoModificado);
+			clienteDominio usuario = (clienteDominio) request.getSession().getAttribute("usuario");
+			Collection<productoDominio> listaProductos = daoProducto.recuperarProductosPorDueno(usuario);
+			request.getSession().setAttribute("listaProductos", listaProductos);
 			request.setAttribute(EDICION_SATISFACTORIA, TRUE);
 		} 
 	}
 	
 
-	private productoDominio getProductoAlta(HttpServletRequest request) {
+	private productoDominio getProducto(HttpServletRequest request) {
 		productoDominio producto = new productoDominio();
 		clienteDominio usuario = (clienteDominio)request.getSession().getAttribute("usuario");
 		
@@ -174,31 +182,6 @@ public class productoServlet extends HttpServlet {
 		return producto;
 	}
 	
-	private productoDominio getProductoBaja(HttpServletRequest request) {
-		productoDominio ProductoBaja = this.getProductoBaja(request);
-		ProductoBaja.getTitulo();
-		ProductoBaja.getCategoria();
-		ProductoBaja.getDescripcion();
-		ProductoBaja.getPrecio();
-		ProductoBaja.getEstado();
-		
-		return ProductoBaja;
-		
-	}
-	
-	private productoDominio getProductoEditado(HttpServletRequest request) {
-		productoDominio ProductoModificado = new productoDominio();
-		clienteDominio usuario = (clienteDominio)request.getSession().getAttribute("usuario");
-		
-		ProductoModificado.setTitulo(request.getParameter("titulo"));
-		ProductoModificado.setCategoria(request.getParameter("categoria"));
-		ProductoModificado.setDescripcion(request.getParameter("descripcion"));
-		ProductoModificado.setPrecio(request.getParameter("precio"));
-		ProductoModificado.setEstado(request.getParameter("estado"));
-	
-		return ProductoModificado;
-	}
-
 	private boolean IsValid(productoDominio produc) {
 		return true;
 	}
