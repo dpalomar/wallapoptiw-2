@@ -94,7 +94,9 @@
 					</div>
 					<input type="submit" onclick="return validacion();" value="Confirmar cambios" id="boton" class="btn btn-info">
 		</form>
-	  
+	  <p>
+		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
+	</p>
 	  <div class="footer">
 		<p>&copy; 2016 Wallapop, Inc.</p>
     </div>

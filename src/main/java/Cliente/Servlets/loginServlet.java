@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collection;
-
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -118,16 +117,8 @@ public class loginServlet extends HttpServlet {
     	 	p1.setPrecio("45");
     	 	p1.setEstado("Vendido");
     	 	p1.setDuenoProducto(u1);
-    	 	/*try {
-				File imagen1 = new File("/home/tiw/wallapoptiw/src/main/webapp/images/cajones.jpg");
-				InputStream im1 = new FileInputStream(imagen1);
-				byte [] buffer = new byte [(int) imagen1.length()];
-				int readers = im1.read(buffer);
-				p1.setImagen(buffer);
-    	 	} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+    	 	
+    	 	
     	 	
     	 	
     	 
@@ -137,6 +128,7 @@ public class loginServlet extends HttpServlet {
     	 	p2.setPrecio("340");
     	 	p2.setEstado("Disponible");
     	 	p2.setDuenoProducto(u2);
+    	 	
     	 
     	 	p3.setTitulo("Sofa de esquina");
     	 	p3.setCategoria("Mobiliario");
@@ -145,12 +137,14 @@ public class loginServlet extends HttpServlet {
     	 	p3.setEstado("Disponible");
     	 	p3.setDuenoProducto(u3);
     	 	
+    	 	
     	 	p4.setTitulo("Iphone 4s");
     	 	p4.setCategoria("Electrónica");
     	 	p4.setDescripcion("Iphone 4s con cargador y auriculares incluidos");
     	 	p4.setPrecio("120");
     	 	p4.setEstado("Disponible");
     	 	p4.setDuenoProducto(u1);
+    	 	
     	 	
     	 	p5.setTitulo("Bolso Miau");
     	 	p5.setCategoria("Moda y belleza");
@@ -159,12 +153,14 @@ public class loginServlet extends HttpServlet {
     	 	p5.setEstado("Vendido");
     	 	p5.setDuenoProducto(u2);
     	 	
+    	 	
     	 	p6.setTitulo("Cachimba");
     	 	p6.setCategoria("Otros");
     	 	p6.setDescripcion("Cachimba de 50cm traida de Marruecos");
     	 	p6.setPrecio("65");
     	 	p6.setEstado("Disponible");
     	 	p6.setDuenoProducto(u3);
+    	 	
 	    	 	
 	    	 try {
 	    		 

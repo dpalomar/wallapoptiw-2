@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,7 +71,8 @@ public class MensajesServlet extends HttpServlet {
 		List<Mensaje> mensajes = msgDao.findAllMessagesByUsuario(u);
 		request.setAttribute("usuario", u);
 		request.setAttribute("listaMensajes", mensajes);
-		this.getServletContext().getRequestDispatcher("/chat.jsp").forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -80,7 +82,7 @@ public class MensajesServlet extends HttpServlet {
 		Mensaje msgDao = null;
 		try {
 			String mensaje = request.getParameter("mensaje");
-			clienteDominio from = dao.recuperarUnClientePorClave(Integer.valueOf(request.getParameter("from")));
+			clienteDominio from = (clienteDominio) request.getSession().getAttribute("usuario");
 			clienteDominio to = dao.recuperarUnClientePorCorreo(request.getParameter("to"));
 			
 			msgDao = new Mensaje(mensaje,from, to);
@@ -92,7 +94,8 @@ public class MensajesServlet extends HttpServlet {
 
 		colaMensajes.enviar(msgDao);
 		
-		this.getServletConfig().getServletContext().getRequestDispatcher("/mensajes").forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("chat.jsp");
+		rd.forward(request, response);
 	}
 
 }

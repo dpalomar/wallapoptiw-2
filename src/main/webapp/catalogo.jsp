@@ -103,7 +103,9 @@
 		
 
 		<% } %>
-	
+		<p>
+		<a class ="btn btn-info" href="javascript:history.go(-1)">Volver</a>
+		</p>
 		<div class="footer">
 			<p>&copy; 2016 Wallapop, Inc.</p>
 		</div>
