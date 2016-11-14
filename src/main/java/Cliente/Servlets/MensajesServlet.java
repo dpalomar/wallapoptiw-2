@@ -50,9 +50,7 @@ public class MensajesServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
+
 	public void init() throws ServletException {
 		dao = new clienteDAOImp();
 		dao.setConexion(em);

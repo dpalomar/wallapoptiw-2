@@ -52,9 +52,7 @@ public class modificarPerfil extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
+
 	public void init(ServletConfig config) throws ServletException {
 		//this.config = config;
 		
@@ -68,9 +66,7 @@ public class modificarPerfil extends HttpServlet {
 
 	}
 
-	/**
-	 * @see Servlet#destroy()
-	 */
+
 	public void destroy() {
 		try {
 			con.close();
